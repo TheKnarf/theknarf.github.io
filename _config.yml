@@ -15,5 +15,15 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://theknarf.com" # the base hostname & protocol for your site
 github_username:  theknarf
 
+exclude:
+- config.rb
+- Gemfile
+- Gemfile.lock
+- gems
+- Procfile
+- Rakefile
+- README.md
+- vendor
+
 # Build settings
 markdown: kramdown
