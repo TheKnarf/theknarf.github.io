@@ -1,0 +1,25 @@
+{
+  "name": "webpack-git-deploy",
+  "version": "1.0.0",
+  "description": "Runs a webpack build and deploys the artifacts on another branch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "webpack-git-deploy": "bin/webpack-git-deploy.js"
+  },
+  "keywords": [
+    "webpack",
+    "git"
+  ],
+  "author": "Frank Lyder Bredland <fl@nyggen.com>",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.7.8",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^3.2.0"
+  }
+}
