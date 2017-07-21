@@ -3,7 +3,7 @@ const MemoryFS = require("memory-fs");
 const webpack = require("webpack");
 
 const AUTHOR_NAME='Webpack-git-deploy';
-const AUTHOR_EMAIL='noreply@theknarf.com';
+const AUTHOR_EMAIL='noreply@Webpack-git-deploy.github.io';
 
 const yargs = require("yargs");
 require("webpack/bin/config-yargs")(yargs);
@@ -45,17 +45,6 @@ function processOptions(wpOpt) {
 	compiler.run((err, stats) => {
 		var tree = {};
 		var hashes = [];
-
-		function debugFs(filename) {
-			console.log(filename)
-
-			if(fs.statSync(filename).isDirectory()) {
-				fs
-					.readdirSync(filename)
-					.forEach((filename2) => debugFs(filename + filename2 + "/" ));
-			}
-		}
-		//debugFs('/');
 
 		Object.keys(stats.compilation.assets).forEach((filename) => {
 			const filecontent = fs.readFileSync('/' + filename);
