@@ -1,23 +1,23 @@
 #!/usr/bin/env node
-const MemoryFS = require("memory-fs");
-const webpack = require("webpack");
 
 const AUTHOR_NAME='Webpack-git-deploy';
 const AUTHOR_EMAIL='noreply@Webpack-git-deploy.github.io';
 
 const yargs = require("yargs");
 require("webpack/bin/config-yargs")(yargs);
+//require("./config-yargs")(yargs);
 
 const argv = yargs.argv;
 
 const wpOpt = require("webpack/bin/convert-argv")(yargs, argv);
 
-wpOpt.output.path = '/';
-
 function processOptions(wpOpt) {
 	let compiler;
+	const webpack = require("webpack");
 	try {
+		wpOpt.output.path = '/';
 		compiler = webpack(wpOpt);
+		compiler.outputFileSystem = new (require("memory-fs"));
 	} catch(e) {
 		if(e instanceof webpack.WebpackOptionsValidationError) {
 			console.error(colorError(options.stats.colors, e.message));
@@ -35,19 +35,14 @@ function processOptions(wpOpt) {
 	require('js-git/mixins/mem-db')(repo);
 	require('js-git/mixins/create-tree')(repo);
 	require('js-git/mixins/pack-ops')(repo);
-	require('js-git/mixins/walkers')(repo);
-	require('js-git/mixins/read-combiner')(repo);
 	require('js-git/mixins/formats')(repo);
-
-	const fs = new MemoryFS();
-	compiler.outputFileSystem = fs;
 
 	compiler.run((err, stats) => {
 		var tree = {};
 		var hashes = [];
 
 		Object.keys(stats.compilation.assets).forEach((filename) => {
-			const filecontent = fs.readFileSync('/' + filename);
+			const filecontent = compiler.outputFileSystem.readFileSync('/' + filename);
 			
 			repo.saveAs("blob", filecontent, (err, blobHash) => {
 				if (err) throw err;
@@ -87,5 +82,4 @@ function processOptions(wpOpt) {
 		});
 	});
 }
-
 processOptions(wpOpt);
