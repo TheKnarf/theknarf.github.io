@@ -16,6 +16,8 @@
   "author": "Frank Lyder Bredland <fl@nyggen.com>",
   "license": "MIT",
   "dependencies": {
+    "js-git": "^0.7.8",
+    "memory-fs": "^0.4.1",
     "shelljs": "^0.7.8",
     "yargs": "^8.0.2"
   },
