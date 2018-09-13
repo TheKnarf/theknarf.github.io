@@ -1,4 +1,4 @@
-import dom from 'isomorphic-jsx';
+import { dom } from 'isomorphic-jsx';
 import img from '../img/profile.png';
 
 export default () => <div class="center-vertical">

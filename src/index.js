@@ -1,5 +1,5 @@
 import CNAME from 'file-loader?name=CNAME!./CNAME';
-import dom from 'isomorphic-jsx';
+import { dom } from 'isomorphic-jsx';
 
 const requireAll = r => r.keys().map(r);
 var possible_routes = requireAll(require.context('./pages', true, /\.(js|jsx|md|mdx|html)$/));

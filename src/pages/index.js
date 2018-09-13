@@ -2,7 +2,7 @@
 route: 'index.html'
 ---
 
-import dom from 'isomorphic-jsx';
+import { dom } from 'isomorphic-jsx';
 
 import Page from './default'; 
 export const layout = Page;

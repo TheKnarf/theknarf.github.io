@@ -21,12 +21,13 @@ module.exports = {
 		},
 		{
 			test: /\.mdx?$/,
+			exclude: /node_modules/,
 			use: [
 				'babel-loader',
 				{
 					loader: 'mdx-jsx-loader',
 					options: {
-						process: (data) => `import dom, {MDXTag} from 'isomorphic-jsx'; ${data}`
+						process: (data) => `import { dom } from 'isomorphic-jsx'; import { MDXTag } from 'mdxtag'; ${data}`
 					}
 				},
 				'simple-frontmatter-loader',
@@ -53,7 +54,10 @@ module.exports = {
 	],
 	resolve: {
 		extensions: ['.js', '.jsx', '.md', '.mdx', '.html'],
-		modules: [ path.resolve(__dirname, 'modules'), 'node_modules' ]	
+		modules: [ path.resolve(__dirname, 'modules'), 'node_modules' ],
+		alias: {
+			react: 'isomorphic-jsx'
+		}
 	},
 	resolveLoader: {
 		modules: [ path.resolve(__dirname, 'loaders'), 'node_modules' ]	

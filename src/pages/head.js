@@ -1,4 +1,4 @@
-import dom from 'isomorphic-jsx';
+import { dom } from 'isomorphic-jsx';
 import '../css/main.scss';
 import { page } from '../config.js';
 

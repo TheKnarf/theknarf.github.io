@@ -1,4 +1,6 @@
-function attr_fix(key, value) {
+import { dom } from 'isomorphic-jsx';
+
+/*function attr_fix(key, value) {
 	if(typeof value === 'object') {
 		value = Object
 			.keys(value)
@@ -7,7 +9,7 @@ function attr_fix(key, value) {
 	}
 
 	return `${key}="${value}"`;
-}
+}//*/
 
 export function MDXTag(props) {
   const {
@@ -29,6 +31,7 @@ export function MDXTag(props) {
   return <Component {...childProps}>{children}</Component>
 }
 
+/*
 export default function dom(type, attributes, ...children) {
 	const attr = Object
 		.keys(attributes || {})
@@ -57,5 +60,4 @@ export function sls(strings, ...values) {
 		.join(' ')
 		.trim();
 }
-
-
+*/

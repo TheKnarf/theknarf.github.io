@@ -1,4 +1,4 @@
-import dom from 'isomorphic-jsx';
+import { dom } from 'isomorphic-jsx';
 import Head from './head';
 import Sidebar from './sidebar';
 
