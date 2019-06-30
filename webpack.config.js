@@ -27,7 +27,7 @@ module.exports = {
 				{
 					loader: 'mdx-jsx-loader',
 					options: {
-						process: (data) => `import { dom } from 'isomorphic-jsx'; import { MDXTag } from 'mdxtag'; ${data}`
+						process: (data) => `import { dom } from 'isomorphic-jsx'; import { MDXTag } from 'mdxtag'; ${data}`
 					}
 				},
 				'simple-frontmatter-loader',
