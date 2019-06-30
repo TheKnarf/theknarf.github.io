@@ -1,5 +1,5 @@
 import { dom } from 'isomorphic-jsx';
-import '../css/main.scss';
+import '../css/main.css';
 import { page } from '../config.js';
 
 export default () => <head>
