@@ -1,11 +1,13 @@
 {
-	presets: [
-		['env', { loose: true } ],
-		'react'
-	],
-	plugins: [
-		['transform-react-jsx', {
-			'pragma': 'dom'
-		}]
-	]
+  presets: [
+  	 [ '@babel/preset-env', {
+	 	loose: true,
+		modules: 'commonjs',
+	 }],
+    [ '@babel/preset-react', {
+	 	pragma: 'dom',
+		pragmaFrag: 'fragment',
+		throwIfNamespace: false
+    }],
+  ]
 }
