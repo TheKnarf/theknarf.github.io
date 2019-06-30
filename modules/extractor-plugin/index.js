@@ -4,7 +4,7 @@ function Extractor(options) {
 }
 
 Extractor.prototype.apply = function(compiler) {
-	compiler.plugin('emit', (compilation, callback) => {
+	compiler.hooks.emit.tapAsync('ExtractorPlugin', (compilation, callback) => {
 
 		if(typeof this.filename !== 'undefined' &&
 			typeof compilation['assets'][this.filename] !== 'undefined') {
