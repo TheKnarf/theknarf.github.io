@@ -1,5 +1,5 @@
 const path = require('path'),
-	Extractor = require('./modules/extractor-plugin/index.js'),
+	Extractor = require('extractor-webpack-plugin'),
 	MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {

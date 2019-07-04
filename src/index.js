@@ -6,7 +6,7 @@ var possible_routes = requireAll(require.context('./pages', true, /\.(js|jsx|md|
 
 const routes = possible_routes
 	.filter(item => typeof item['frontmatter'] !== 'undefined'
-        && item => typeof item['frontmatter']['route'] !== 'undefined')
+                && typeof item['frontmatter']['route'] !== 'undefined')
 	.map(item => {
 		const route = item['frontmatter']['route'];
 
