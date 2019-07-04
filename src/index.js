@@ -4,9 +4,9 @@ import { dom } from 'isomorphic-jsx';
 const requireAll = r => r.keys().map(r);
 var possible_routes = requireAll(require.context('./pages', true, /\.(js|jsx|md|mdx|html)$/));
 
-module.exports = possible_routes
-	.filter(item => typeof item['frontmatter'] !== 'undefined')
-	.filter(item => typeof item['frontmatter']['route'] !== 'undefined')
+const routes = possible_routes
+	.filter(item => typeof item['frontmatter'] !== 'undefined'
+        && item => typeof item['frontmatter']['route'] !== 'undefined')
 	.map(item => {
 		const route = item['frontmatter']['route'];
 
@@ -14,10 +14,16 @@ module.exports = possible_routes
 						item['default'] :
 						() => item['default'];
 
-		if(typeof item['layout'] == 'function') {
+		if(typeof item['layout'] == 'function') {
 			const Layout = item['layout'];
 			return { route, content: <Layout><Func /></Layout> };
 		}
 
 		return { route, content: <Func /> };
 	});
+
+module.exports = (addAsset) => {
+	routes.map( ({ route, content }) =>
+		addAsset(route, content)
+	);
+};

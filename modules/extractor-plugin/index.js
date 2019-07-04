@@ -1,4 +1,4 @@
-const tmpFilename = 'WebpackExtractorPluginTmpFilename.js';
+const tmpFilename = '_WebpackExtractorPluginTmpFilename.js';
 
 function Extractor(options) {}
 
@@ -11,29 +11,20 @@ Extractor.prototype.apply = function(compiler) {
 		if(typeof compilation['assets'][tmpFilename] !== 'undefined') {
 
 			const source = compilation['assets'][tmpFilename].source(),
-					filelist = eval(source);
+					func = eval(source);
 
-			if(typeof filelist.length == 'number') {
-
-				filelist.forEach( ({ route, content }) => {
-					compilation.assets[route] = {
-						source: () => content,
-						size: () => content.length
-					}
-				});
-
-			} else {
-
-				for(var filename in filelist) {
-					((f, c) => {
-						compilation.assets[f] = {
-							source: () => c,
-							size: () => c.length
-						}
-					})(filename, filelist[filename]);
-				}
-
+			if(typeof func !== 'function') {
+				throw new Error('Not an function');
 			}
+
+			const addCompilationAsset = (name, content) => {
+				compilation.assets[name] = {
+					source: () => content,
+					size: () => content.length
+				};
+			}
+
+			func(addCompilationAsset);
 
 			delete compilation['assets'][tmpFilename];
 		}
