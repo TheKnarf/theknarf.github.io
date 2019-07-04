@@ -3,10 +3,6 @@ const path = require('path'),
 	MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-	output: {
-		filename: 'tmp.js',
-		libraryTarget: 'commonjs2'
-	},
 	target: 'node',
 	externals: [ require('webpack-node-externals')() ],
 	module: {
@@ -50,7 +46,7 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin(),
-		new Extractor({ filename: 'tmp.js' }),
+		new Extractor(),
 	],
 	resolve: {
 		extensions: ['.js', '.jsx', '.md', '.mdx', '.html'],

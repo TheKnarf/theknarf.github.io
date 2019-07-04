@@ -1,17 +1,17 @@
-function Extractor(options) {
-	if(typeof options !== 'undefined' && typeof options.filename !== 'undefined')
-		this.filename = options.filename;
-}
+const tmpFilename = 'WebpackExtractorPluginTmpFilename.js';
+
+function Extractor(options) {}
 
 Extractor.prototype.apply = function(compiler) {
+	compiler.options.output.filename =  tmpFilename;
+	compiler.options.output.libraryTarget= 'commonjs2';
+
 	compiler.hooks.emit.tapAsync('ExtractorPlugin', (compilation, callback) => {
 
-		if(typeof this.filename !== 'undefined' &&
-			typeof compilation['assets'][this.filename] !== 'undefined') {
+		if(typeof compilation['assets'][tmpFilename] !== 'undefined') {
 
-			const filelist = eval(
-					compilation['assets'][this.filename].source()
-			);
+			const source = compilation['assets'][tmpFilename].source(),
+					filelist = eval(source);
 
 			if(typeof filelist.length == 'number') {
 
@@ -35,7 +35,7 @@ Extractor.prototype.apply = function(compiler) {
 
 			}
 
-			delete compilation['assets'][this.filename];
+			delete compilation['assets'][tmpFilename];
 		}
 		
 		callback();
