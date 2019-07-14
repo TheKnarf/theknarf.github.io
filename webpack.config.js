@@ -20,12 +20,7 @@ module.exports = {
 			exclude: /node_modules/,
 			use: [
 				'babel-loader',
-				{
-					loader: 'mdx-jsx-loader',
-					options: {
-						process: (data) => `import { dom } from 'isomorphic-jsx'; import { MDXTag } from 'mdxtag'; ${data}`
-					}
-				},
+				'mdx-jsx-loader',
 				'simple-frontmatter-loader',
 			]
 		},
