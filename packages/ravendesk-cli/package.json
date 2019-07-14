@@ -1,0 +1,22 @@
+{
+  "name": "@ravendesk/cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Frank Lyder Bredland <fl@nyggen.com>",
+  "license": "MIT",
+  "bin": {
+    "ravendesk": "src/index.js"
+  },
+  "dependencies": {
+    "commander": "^2.20.0",
+    "webpack": "^4.35.3"
+  },
+  "files": [
+    "src/**/*"
+  ]
+}
