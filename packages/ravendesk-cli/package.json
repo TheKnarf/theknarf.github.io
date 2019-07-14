@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "commander": "^2.20.0",
-    "webpack": "^4.35.3"
+    "express": "^4.17.1",
+    "webpack": "^4.35.3",
+    "webpack-dev-middleware": "^3.7.0"
   },
   "files": [
     "src/**/*"
