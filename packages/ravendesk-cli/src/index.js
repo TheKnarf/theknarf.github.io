@@ -29,22 +29,40 @@ const setupCompiler = async () => {
 		return false;
 	}
 
-	const config = await asyncReadFile('webpack.config.js');
+	const config = await asyncReadFile('./webpack.config.js');
 	return webpack(eval(config));
 };
 
 const buildAction = async () => {
-	console.log("RavenDesk building");
+	try {
+		console.log("RavenDesk building");
 
-	const compiler = await setupCompiler();
-	if(!compiler) return;
+		const compiler = await setupCompiler();
+		if(!compiler) return;
 
-	compiler.run((err, stats) => {
-		if(err || stats.hasErrors()) {
-			throw err;
-		}
-		console.log('Compiled');
-	});
+		compiler.run((err, stats) => {
+			if (err) {
+				console.error(err.stack || err);
+				if (err.details) {
+					console.error(err.details);
+				}
+				return;
+			}
+
+			const info = stats.toJson();
+
+			if (stats.hasErrors()) {
+				console.error(info.errors);
+			}
+
+			if (stats.hasWarnings()) {
+				console.warn(info.warnings);
+			}
+			console.log('Compiled');
+		});
+	} catch(e) {
+		console.error(e);
+	}
 };
 
 const devAction = async () => {
