@@ -1,0 +1,14 @@
+{
+  "name": "theknarf-com",
+  "version": "1.0.0",
+  "private": "true",
+  "scripts": {
+    "build": "ravendesk build",
+    "dev": "ravendesk dev"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@ravendesk/cli": "./packages/ravendesk-cli",
+    "@ravendesk/preset-env": "./packages/ravendesk-preset-env"
+  }
+}
