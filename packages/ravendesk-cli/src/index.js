@@ -14,4 +14,4 @@ require('./command/workspaces')(program);
 program.parse(process.argv);
 
 if( process.argv.length < 3 )
-	return program.outputHelp();
+	program.outputHelp();
