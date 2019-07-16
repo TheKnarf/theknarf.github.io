@@ -5,7 +5,7 @@ const AUTHOR_EMAIL='noreply@Webpack-git-deploy.github.io';
 
 const yargs = require("yargs");
 require("webpack/bin/config-yargs")(yargs);
-//require("./config-yargs")(yargs);
+require("./config-yargs")(yargs);
 
 const argv = yargs.argv;
 
