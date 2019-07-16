@@ -18,7 +18,7 @@ const asyncGlob = async (pattern) => new Promise((resolve, reject) =>
 // Based on: https://flaviocopes.com/how-to-check-if-file-exists-node/
 const asyncFileExists = async (path) => new Promise((resolve, reject) =>
 	fs.access(path, fs.F_OK, (err) => {
-		if(err) return reject(err);
+		if(err) return resolve(false);
 		resolve(true);
 	})
 );
