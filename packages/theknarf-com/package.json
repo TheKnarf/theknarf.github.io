@@ -9,6 +9,6 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@ravendesk/cli": "./packages/ravendesk-cli",
-    "@ravendesk/preset-env": "./packages/ravendesk-preset-env"
+    "@ravendesk/preset-blog": "./packages/ravendesk-preset-blog"
   }
 }

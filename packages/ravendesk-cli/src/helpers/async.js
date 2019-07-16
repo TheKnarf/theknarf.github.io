@@ -8,6 +8,13 @@ const readFile = async (file, encoding='utf8') => new Promise((resolve, reject) 
 	})
 );
 
+const writeFile = async (file, data) => new Promise((resolve, reject) =>
+	fs.writeFile(file, data, (err) => {
+		if(err) return reject(err);
+		resolve();
+	})
+);
+
 const glob = async (pattern) => new Promise((resolve, reject) =>
 	globCallback(pattern, (err, files) => {
 		if(err) return reject(err);
@@ -32,6 +39,7 @@ const mkdir = async (path) => new Promise((resolve, reject) =>
 
 module.exports = {
 	readFile,
+	writeFile,
 	fileExists,
 	glob,
 	mkdir,

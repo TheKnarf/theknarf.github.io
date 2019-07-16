@@ -10,6 +10,7 @@ require('./command/init')(program);
 require('./command/build')(program);
 require('./command/dev')(program);
 require('./command/workspaces')(program);
+require('./command/ci')(program);
 
 program.parse(process.argv);
 

@@ -1,7 +1,7 @@
 {
-  "name": "@ravendesk/preset-env",
+  "name": "@ravendesk/preset-blog",
   "version": "1.0.0",
-  "main": "src/webpack.config.js",
+  "main": "src/index.js",
   "author": "Frank Lyder Bredland <fl@nyggen.com>",
   "license": "MIT",
   "dependencies": {
