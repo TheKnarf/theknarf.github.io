@@ -1,6 +1,7 @@
 [submodule "packages/theknarf-experiments"]
 	path = packages/theknarf-experiments
 	url = git@github.com:theknarf-experiments/theknarf-experiments.github.io.git
+	branch = dev
 [submodule "packages/theknarf-talks"]
 	path = packages/theknarf-talks
 	url = git@github.com:theknarf-talks/theknarf-talks.github.io.git
