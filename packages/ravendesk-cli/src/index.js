@@ -7,17 +7,13 @@ const fs = require('fs'),
 		middleware = require('webpack-dev-middleware'),
 		express = require('express');
 
+const { asyncReadFile } = require('./helpers/async.js');
+const workspacesCommand = require('./command/workspaces');
+
 program
 	.version('0.0.1')
 	.usage('[options]')
 	.description('RavenDesk static site generator')
-
-const asyncReadFile = async (file, encoding='utf8') => new Promise((resolve, reject) =>
-	fs.readFile(file, encoding, (err, content) => {
-		if(err) return reject(err);
-		resolve(content);
-	})
-);
 
 const initActino = () => {
 	console.log("tbi init");
@@ -86,6 +82,8 @@ const devAction = async () => {
 program.command('init').action(initActino);
 program.command('build').action(buildAction);
 program.command('dev').action(devAction);
+
+workspacesCommand(program);
 
 program.parse(process.argv);
 
