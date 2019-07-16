@@ -1,0 +1,9 @@
+[submodule "packages/theknarf-experiments"]
+	path = packages/theknarf-experiments
+	url = git@github.com:theknarf-experiments/theknarf-experiments.github.io.git
+[submodule "packages/theknarf-talks"]
+	path = packages/theknarf-talks
+	url = git@github.com:theknarf-talks/theknarf-talks.github.io.git
+[submodule "packages/theknarf-notes"]
+	path = packages/theknarf-notes
+	url = git@github.com:theknarf-notes/theknarf-notes.github.io.git
