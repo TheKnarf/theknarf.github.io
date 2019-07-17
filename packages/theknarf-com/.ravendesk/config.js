@@ -21,4 +21,8 @@ module.exports = (addAsset) => {
 
 			addAsset(route, <Layout><Func /></Layout>);
 		});
+
+	// This will let GitHub Pages know that it's not an Jekyll page
+	// ref: https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
+	addAsset('.nojekyll', '');
 };
