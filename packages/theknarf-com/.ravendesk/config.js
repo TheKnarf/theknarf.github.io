@@ -16,7 +16,7 @@ module.exports = (addAsset) => {
 				() => item['default'];
 
 			let Layout = ({ children }) => children;
-			if(typeof item['layout'] == 'function');
+			if(typeof item['layout'] == 'function')
 				Layout = item['layout'];
 
 			addAsset(route, <Layout><Func /></Layout>);
