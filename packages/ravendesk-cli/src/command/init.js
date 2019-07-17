@@ -1,5 +1,6 @@
 const async = require('../helpers/async.js');
 const { ravendesk_folder, config_file, webpack_config_file } = require('../config.js');
+const gitignore = require('../asset/default-gitignore.js');
 
 const action = async (workspace, cmd) => {
 	if(typeof workspace !== 'undefined')
@@ -30,6 +31,13 @@ module.exports = (addAsset) => {
 	if(typeof cmd.preset !== 'undefined') {
 		console.log(`- ${webpack_config_file}`);
 		async.writeFile(webpack_config_file, `module.exports = require('${cmd.preset}');`);	
+	}
+
+	if(await async.fileExists('.gitignore')) {
+		console.log('.gitignore allready exists');
+	} else {
+		console.log(`- .gitignore`);
+		async.writeFile('.gitignore', gitignore);
 	}
 
 	// TODO: also update package.json with dependecies and build scripts
