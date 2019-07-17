@@ -8,3 +8,7 @@
 [submodule "packages/theknarf-notes"]
 	path = packages/theknarf-notes
 	url = git@github.com:theknarf-notes/theknarf-notes.github.io.git
+[submodule "packages/beerjs"]
+	path = packages/beerjs
+	url = git@github.com:TheKnarf/beerjs.github.io.git
+	branch = dev
