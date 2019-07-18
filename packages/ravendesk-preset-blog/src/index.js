@@ -33,7 +33,7 @@ module.exports = ({ config, mode }) => {
 			]
 		},
 		{ test: /\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader' ] },
-		{ test: /\.(png|jpg|gif|svg)$/, loader: 'file-loader' },
+		{ test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file-loader' },
 	];
 
 	config.plugins.push(new MiniCssExtractPlugin());
