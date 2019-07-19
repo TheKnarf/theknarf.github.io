@@ -1,6 +1,6 @@
 import { dom } from 'isomorphic-jsx';
-import '../css/main.css';
-import { page } from '../config.js';
+import './css/main.css';
+import { page } from './config.js';
 
 export default () => <head>
 	<meta charset="utf-8" />

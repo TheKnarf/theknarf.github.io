@@ -30,6 +30,10 @@ module.exports = (addAsset) => {
 	// This will let GitHub Pages know that it's not an Jekyll page
 	// ref: https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
 	addAsset('.nojekyll', '');
+
+	// For Github Pages you can set a custom CNAME record
+	// see: https://help.github.com/en/articles/using-a-custom-domain-with-github-pages
+	//addAsset('CNAME', 'your-domain.com');
 };`);
 
 	if(typeof cmd.preset !== 'undefined') {

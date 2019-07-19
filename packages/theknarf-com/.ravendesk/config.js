@@ -25,4 +25,6 @@ module.exports = (addAsset) => {
 	// This will let GitHub Pages know that it's not an Jekyll page
 	// ref: https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/
 	addAsset('.nojekyll', '');
+
+	addAsset('CNAME', 'theknarf.com');
 };
