@@ -4,12 +4,7 @@ const async = require('../helpers/async.js'),
 
 const { config_file, webpack_config_file } = require('../config.js');
 
-const setupCompiler = async () => {
-	if(!(await async.fileExists(config_file))) {
-		console.error(`Can't find ${config_file}`);
-		return false;
-	}
-
+const setupWebpackConfig = async (mode = 'production') => {
 	let webpack_config = {
 		entry: './' + config_file,
 		module: {
@@ -43,13 +38,24 @@ const setupCompiler = async () => {
 
 		webpack_config = webpackConfigFunc({
 			config: webpack_config,
-			mode: 'production'
+			mode
 		});
 	}
 
+	return webpack_config;
+};
+
+const setupCompiler = async () => {
+	if(!(await async.fileExists(config_file))) {
+		console.error(`Can't find ${config_file}`);
+		return false;
+	}
+
+	const webpack_config = await setupWebpackConfig('production');
 	return webpack({ ...webpack_config, mode: 'production' });
 };
 
 module.exports = {
 	setupCompiler,
+	setupWebpackConfig,
 };

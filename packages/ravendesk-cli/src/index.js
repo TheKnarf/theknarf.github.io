@@ -12,6 +12,7 @@ require('./command/dev')(program);
 require('./command/workspaces')(program);
 require('./command/ci')(program);
 require('./command/deploy')(program);
+require('./command/webpack-config-debug')(program);
 
 program.parse(process.argv);
 
