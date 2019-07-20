@@ -4,8 +4,8 @@ const async = require('../helpers/async.js'),
 
 const { config_file, webpack_config_file } = require('../config.js');
 
-const setupWebpackConfig = async (mode = 'production') => {
-	let webpack_config = {
+const minimalWebpackConfig = (mode = 'production') => {
+	return {
 		entry: './' + config_file,
 		module: {
 			rules: [
@@ -29,20 +29,22 @@ const setupWebpackConfig = async (mode = 'production') => {
 			new ExtractorPlugin()
 		]
 	};
+}
 
+const setupWebpackConfig = async (mode = 'production') => {
 	if(await async.fileExists(webpack_config_file)) {
 		const webpackConfigFunc = eval(await async.readFile(webpack_config_file));
 
 		if(typeof webpackConfigFunc !== 'function')
 			return console.error(`Loaded file ${webpack_config_file} but it didn't export a function`);
 
-		webpack_config = webpackConfigFunc({
-			config: webpack_config,
+		return webpackConfigFunc({
+			config: minimalWebpackConfig(mode),
 			mode
 		});
 	}
 
-	return webpack_config;
+	return minimalWebpackConfig(mode);
 };
 
 const setupCompiler = async () => {
@@ -58,4 +60,5 @@ const setupCompiler = async () => {
 module.exports = {
 	setupCompiler,
 	setupWebpackConfig,
+	minimalWebpackConfig,
 };
