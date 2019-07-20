@@ -3,6 +3,8 @@ const { webpack_config_file } = require('../config.js');
 const { minimalWebpackConfig, setupWebpackConfig } = require('../helpers/compiler');
 
 const action = async (cmd) => {
+	// TODO: fix printout bugs here.
+	//       JSON.stringify can't print regex's and functions
 	if(!!cmd.minimal) {
 		console.log('PS. json.stringify doesn\'t print out functions and therefor plugins seems empty');
 		console.log(
