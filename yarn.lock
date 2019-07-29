@@ -954,6 +954,13 @@
     unist-builder "^1.0.1"
     unist-util-visit "^1.3.0"
 
+"@ravendesk/atom@./packages/ravendesk-atom":
+  version "1.0.0"
+  dependencies:
+    "@ravendesk/cli" "./packages/ravendesk-cli"
+    "@ravendesk/preset-blog" "./packages/ravendesk-preset-blog"
+    jest "^24.8.0"
+
 "@ravendesk/cli@./packages/ravendesk-cli":
   version "1.0.0"
   dependencies:
