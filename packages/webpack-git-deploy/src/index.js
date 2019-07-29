@@ -5,9 +5,10 @@ const {
 	saveAsBlob,
 	saveAsTree,
 	saveAsCommit,
+	pack,
 } = require('./git');
 
-// TODO: how do I unit test this?
+// TODO: how do I unit-/integration-test this?
 
 function WebpackGitDeployPlugin(options) {
 	if(typeof options == 'undefined' ||
@@ -60,7 +61,7 @@ WebpackGitDeployPlugin.prototype.apply = function(compiler) {
 
 		// TODO: this commit should link back to the previus commit
 		// 		so I have to figure out where to get that from.
-		// 		For no I should probably get it as an option to the plugin,
+		// 		For now I should probably get it as an option to the plugin,
 		// 		and then deal with the problem in ravendesk-cli
 		const commitHash = await saveAsCommit(repo, {
 			 author: { name: this.author.name, email: this.author.email },
@@ -69,23 +70,20 @@ WebpackGitDeployPlugin.prototype.apply = function(compiler) {
 		});
 		hashes.push(commitHash);
 		
-		repo.pack(hashes, {}, (err, stream) => {
-			if (err) throw err;
-
-			// TODO: writing it to stdout might be fine if I'm supposed to pipe it into git-unpack-objects
-			//       but the goal is to push it right to the server, so I need to do something else here
-			//
-			//       I also need to keep track of the commitHash
-			function readStream() {
-				stream.take((err, data) => {
-					if(err) throw err;
-					if(data === undefined) return;
-					process.stdout.write(data);
-					readStream();
-				});
-			}
-			readStream();
-		});
+		const stream = await pack(repo, hashes);
+		// TODO: writing it to stdout might be fine if I'm supposed to pipe it into git-unpack-objects
+		//       but the goal is to push it right to the server, so I need to do something else here
+		//
+		//       I also need to keep track of the commitHash
+		function readStream() {
+			stream.take((err, data) => {
+				if(err) throw err;
+				if(data === undefined) return;
+				process.stdout.write(data);
+				readStream();
+			});
+		}
+		readStream();
 
 	});
 };

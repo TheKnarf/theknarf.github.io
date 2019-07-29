@@ -12,7 +12,6 @@ const createNewGitRepo = () => {
 	return repo;
 };
 
-//repo.saveAs("blob", filecontent, (err, blobHash) => {
 const saveAs = (repo, type, content) => new Promise((resolve, reject) => {
 	repo.saveAs(type, content, (err, hash) => {
 		if(err) return reject(err);
@@ -24,10 +23,18 @@ const saveAsBlob =   (repo, content) => saveAs(repo, 'blob',   content);
 const saveAsTree =   (repo, content) => saveAs(repo, 'tree',   content);
 const saveAsCommit = (repo, content) => saveAs(repo, 'commit', content);
 
+const pack = (repo, hashes, options={}) => new Promise((resolve, reject) => {
+	repo.pack(hashes, options, (err, stream) => {
+		if(err) return reject(err);
+		resolve(stream);
+	});
+});
+
 module.exports = {
 	createNewGitRepo,
 	modes,
 	saveAsBlob,
 	saveAsTree,
 	saveAsCommit,
+	pack,
 };
