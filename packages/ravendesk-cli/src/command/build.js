@@ -39,5 +39,5 @@ module.exports = (program) =>
 	program
 		.command('build [workspace]')
 		.option('-l, --lib', 'build as a library', false)
-		.option('-m, --mode', 'production vs development build', 'production')
+		.option('-m, --mode <mode>', 'production vs development build', 'production')
 		.action(action);

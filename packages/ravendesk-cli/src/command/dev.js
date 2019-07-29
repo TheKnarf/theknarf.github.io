@@ -33,13 +33,13 @@ const action = async (workspace, cmd) => {
 		});
 	});
 
-	const port=3000;
-	await app.listen(port);
-	console.log(`Server on http://localhost:${port}/`);
+	await app.listen(cmd.port);
+	console.log(`Server on http://localhost:${cmd.port}/`);
 };
 
 module.exports = (program) =>
 	program
 		.command('dev [workspace]')
-		.option('-m, --mode', 'production vs development build', 'development')
+		.option('-m, --mode <mode>', 'production vs development build', 'development')
+		.option('-p, --port <port>', 'port to run the devserver on', 3000)
 		.action(action);
