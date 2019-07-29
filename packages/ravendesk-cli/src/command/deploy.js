@@ -10,7 +10,12 @@ const action = async (cmd) => {
 		const compiler = await setupCompiler(cmd.mode);
 		if(!compiler) return;
 
-		( new WebpackGitPlugin() ).apply(compiler);
+		( new WebpackGitPlugin({
+			author: {
+				name: 'RavenDesk',
+				email: 'norepy@ravendesk.js.org'
+			}
+		}) ).apply(compiler);
 
 		compiler.run((err, stats) => {
 			if (err) {

@@ -16,11 +16,17 @@ const createNewGitRepo = () => {
 	return repo;
 };
 
-// TODO: theese two values should be options of the webpack plugin
-const AUTHOR_NAME='Webpack-git-deploy';
-const AUTHOR_EMAIL='noreply@webpack-git-deploy.github.io';
+function WebpackGitDeployPlugin(options) {
+	if(typeof options == 'undefined' ||
+		typeof options.author == 'undefined' ||
+		typeof options.author.name == 'undefined' ||
+		typeof options.author.email == 'undefined') {
 
-function WebpackGitDeployPlugin(options) {}
+		throw new Error('Problems setting up WebpackGitDeployPlugin, you need to set option author.name and author.email');
+	}
+
+	this.author = options.author;
+}
 
 WebpackGitDeployPlugin.prototype.apply = function(compiler) {
 	compiler.outputFileSystem = new MemoryFs();
@@ -52,7 +58,7 @@ WebpackGitDeployPlugin.prototype.apply = function(compiler) {
 			// 		For no I should probably get it as an option to the plugin,
 			// 		and then deal with the problem in ravendesk-cli
 			repo.saveAs("commit", {
-			    author: { name: AUTHOR_NAME, email: AUTHOR_EMAIL },
+			    author: { name: this.author.name, email: this.author.email },
 			    tree: treeHash,
 			    message: "Webpack build\n"
 			}, (err, commitHash) => {
