@@ -22,7 +22,8 @@
     "glob": "^7.1.4",
     "isomorphic-jsx": "^0.3.0",
     "webpack": "^4.35.3",
-    "webpack-dev-middleware": "^3.7.0"
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-git-deploy": "./packages/webpack-git-deploy"
   },
   "files": [
     "src/**/*"

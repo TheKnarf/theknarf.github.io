@@ -1,3 +1,3 @@
 # Webpack git deploy
 
-Runs webpack and comits the artifacts to another branch using [js-git](https://github.com/creationix/js-git).
+Webpack plugin that makes a commit out of the build artifacts using [js-git](https://github.com/creationix/js-git).
