@@ -16,3 +16,7 @@
 	path = packages/freesoftwa.re
 	url = git@github.com:TheKnarf/freesoftwa.re.git
 	branch = master
+[submodule "packages/react-presentation"]
+	path = packages/react-presentation
+	url = git@github.com:TheKnarf/react-presentation.git
+	branch = master
