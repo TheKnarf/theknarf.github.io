@@ -1,20 +1,7 @@
 const MemoryFs = require('memory-fs');
+const { createNewGitRepo, modes } = require('./git');
+
 // TODO: how do I unit test this?
-
-// TODO: maybe move the createNewGitRepo stuff into its own file
-// This provides symbolic names for the octal modes used by git trees.
-const modes = require('js-git/lib/modes');
-
-const createNewGitRepo = () => {
-	let repo = {};
-
-	require('js-git/mixins/mem-db')(repo);
-	require('js-git/mixins/create-tree')(repo);
-	require('js-git/mixins/pack-ops')(repo);
-	require('js-git/mixins/formats')(repo);
-
-	return repo;
-};
 
 function WebpackGitDeployPlugin(options) {
 	if(typeof options == 'undefined' ||
@@ -26,6 +13,18 @@ function WebpackGitDeployPlugin(options) {
 	}
 
 	this.author = options.author;
+
+	if(typeof options.parentCommit !== 'undefined')
+		this.parentCommit = options.parentCommit;
+
+	if(typeof options.branch !== 'undefined')
+		this.branch = options.branch;
+
+	if(typeof options.commitMessage !== 'undefined') {
+		this.commitMessage = options.commitMessage;
+	} else {
+		this.commitMessage = "Webpack build\n";
+	}
 }
 
 WebpackGitDeployPlugin.prototype.apply = function(compiler) {
@@ -60,7 +59,7 @@ WebpackGitDeployPlugin.prototype.apply = function(compiler) {
 			repo.saveAs("commit", {
 			    author: { name: this.author.name, email: this.author.email },
 			    tree: treeHash,
-			    message: "Webpack build\n"
+			    message: this.commitMessage
 			}, (err, commitHash) => {
 				if (err) throw err;
 
