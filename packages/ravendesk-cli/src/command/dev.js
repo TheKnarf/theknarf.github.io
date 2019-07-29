@@ -4,10 +4,13 @@ const middleware = require('webpack-dev-middleware'),
 
 const { setupCompiler } = require('../helpers/compiler.js');
 
-const action = async () => {
+const action = async (workspace, cmd) => {
+	if(typeof workspace !== 'undefined')
+		return console.log('Command `dev` does not support workspaces yet');
+
 	console.log("Ravendesk dev server")
 
-	const compiler = await setupCompiler();
+	const compiler = await setupCompiler(cmd.mode);
 	if(!compiler) return;
 
 	const app = express();
@@ -35,6 +38,8 @@ const action = async () => {
 	console.log(`Server on http://localhost:${port}/`);
 };
 
-module.exports = (program) => {
-	program.command('dev [workspace]').action(action);
-};
+module.exports = (program) =>
+	program
+		.command('dev [workspace]')
+		.option('-m, --mode', 'production vs development build', 'development')
+		.action(action);

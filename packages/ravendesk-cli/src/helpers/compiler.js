@@ -47,14 +47,14 @@ const setupWebpackConfig = async (mode = 'production') => {
 	return minimalWebpackConfig(mode);
 };
 
-const setupCompiler = async () => {
+const setupCompiler = async (mode='production') => {
 	if(!(await async.fileExists(config_file))) {
 		console.error(`Can't find ${config_file}`);
 		return false;
 	}
 
-	const webpack_config = await setupWebpackConfig('production');
-	return webpack({ ...webpack_config, mode: 'production' });
+	const webpack_config = await setupWebpackConfig(mode);
+	return webpack({ ...webpack_config, mode });
 };
 
 module.exports = {

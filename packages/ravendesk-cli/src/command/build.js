@@ -1,10 +1,13 @@
 const { setupCompiler } = require('../helpers/compiler.js');
 
-const action = async () => {
+const action = async (workspace, cmd) => {
+	if(typeof workspace !== 'undefined')
+		return console.log('Command `build` does not support workspaces yet');
+
 	try {
 		console.log("RavenDesk building");
 
-		const compiler = await setupCompiler();
+		const compiler = await setupCompiler(cmd.mode);
 		if(!compiler) return;
 
 		compiler.run((err, stats) => {
@@ -32,6 +35,9 @@ const action = async () => {
 	}
 };
 
-module.exports = (program) => {
-	program.command('build [workspace]').action(action);
-};
+module.exports = (program) =>
+	program
+		.command('build [workspace]')
+		.option('-l, --lib', 'build as a library', false)
+		.option('-m, --mode', 'production vs development build', 'production')
+		.action(action);
