@@ -4,7 +4,13 @@ import reducer from './l.ducks.js';
 import Pagebuilder from './pagebuilder.js';
 
 const initialState = {
+	currentPage: 'index',
+	pages: {
+		'index': null
+	},
+	components: {
 
+	},
 };
 
 const store = createStore((state = initialState, action) => {
@@ -30,6 +36,7 @@ const render = () => {
 			})
 		},
 		store,
+		lens: [ 'pages', store.getState().currentPage ]
 	};
 
 	document.body.innerHTML = <Pagebuilder {...props} />

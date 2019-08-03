@@ -10,6 +10,6 @@ export default () => <html>
 		<script src="main.js"></script>
 	</head>
 	<body>
-		<h1> Page builder </h1>
+		<p> Page builder loading... </p>
 	</body>
 </html>;
