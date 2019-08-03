@@ -7,6 +7,7 @@ const { config_file, webpack_config_file } = require('../config.js');
 const minimalWebpackConfig = (mode = 'production') => {
 	return {
 		entry: './' + config_file,
+		mode,
 		module: {
 			rules: [
 				{
@@ -54,7 +55,7 @@ const setupCompiler = async (mode='production') => {
 	}
 
 	const webpack_config = await setupWebpackConfig(mode);
-	return webpack({ ...webpack_config, mode });
+	return webpack(webpack_config);
 };
 
 module.exports = {
