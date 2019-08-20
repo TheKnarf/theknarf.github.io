@@ -1,5 +1,6 @@
 const middleware = require('webpack-dev-middleware'),
 		express = require('express'),
+		http = require('http'),
 		path = require('path'),
 		vhost = require('vhost');
 
@@ -33,19 +34,34 @@ const action = async (workspace, cmd) => {
 
 	const app = express();
 
+	let hostname = 'localhost';
 	if(cmd.hostname) {
 		app.use( vhost(cmd.hostname, middleware(compiler, {}) ));
 		app.use( vhost(cmd.hostname, handle404(compiler) ));
-
-		await app.listen(cmd.port);
-		console.log(`Server on http://${cmd.hostname}:${cmd.port}/`);
+		hostname = cmd.hostname;
 	} else {
 		app.use( middleware(compiler, {}) );
 		app.use( handle404(compiler) );
-
-		await app.listen(cmd.port);
-		console.log(`Server on http://localhost:${cmd.port}/`);
 	}
+	
+	let port = cmd.port;
+	const server = http.createServer(app);
+	server.on('error', (e) => {
+		if (e.code === 'EADDRINUSE') {
+			setTimeout(() => {
+				port++;
+				if(port > cmd.port + 10) {
+					port = 0;
+				}
+				console.log(`Address in use, retrying with port ${port}...`);
+				server.close();
+				server.listen(port);
+				console.log(`Server on http://${hostname}:${port}/`);
+			}, 1000);
+		}
+	});
+	server.listen(port);
+	console.log(`Server on http://${hostname}:${port}/`);
 };
 
 module.exports = (program) =>
