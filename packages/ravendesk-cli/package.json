@@ -18,7 +18,8 @@
   "dependencies": {
     "commander": "^2.20.0",
     "express": "^4.17.1",
-    "extractor-webpack-plugin": "^0.1.0",
+    "extractor-webpack-plugin": "^0.2.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.4",
     "isomorphic-jsx": "^0.3.0",
     "vhost": "^3.0.2",

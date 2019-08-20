@@ -1,5 +1,6 @@
 const middleware = require('webpack-dev-middleware'),
 		express = require('express'),
+		FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'),
 		http = require('http'),
 		path = require('path'),
 		vhost = require('vhost');
@@ -32,15 +33,21 @@ const action = async (workspace, cmd) => {
 	const compiler = await setupCompiler(cmd.mode);
 	if(!compiler) return;
 
+	(new FriendlyErrorsWebpackPlugin({
+		compilationSuccessInfo: {
+			messages: ['Ravendesk dev server']
+		}
+	})).apply(compiler);
+
 	const app = express();
 
 	let hostname = 'localhost';
 	if(cmd.hostname) {
-		app.use( vhost(cmd.hostname, middleware(compiler, {}) ));
+		app.use( vhost(cmd.hostname, middleware(compiler, { quiet: true }) ));
 		app.use( vhost(cmd.hostname, handle404(compiler) ));
 		hostname = cmd.hostname;
 	} else {
-		app.use( middleware(compiler, {}) );
+		app.use( middleware(compiler, { quiet: true }) );
 		app.use( handle404(compiler) );
 	}
 	
