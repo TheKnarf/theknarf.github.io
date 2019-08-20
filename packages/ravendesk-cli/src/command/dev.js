@@ -28,26 +28,18 @@ const action = async (workspace, cmd) => {
 	if(typeof workspace !== 'undefined')
 		return console.log('Command `dev` does not support workspaces yet');
 
-	console.log("Ravendesk dev server")
-
 	const compiler = await setupCompiler(cmd.mode);
 	if(!compiler) return;
-
-	(new FriendlyErrorsWebpackPlugin({
-		compilationSuccessInfo: {
-			messages: ['Ravendesk dev server']
-		}
-	})).apply(compiler);
 
 	const app = express();
 
 	let hostname = 'localhost';
 	if(cmd.hostname) {
-		app.use( vhost(cmd.hostname, middleware(compiler, { quiet: true }) ));
+		app.use( vhost(cmd.hostname, middleware(compiler, { quiet: true, logLevel: 'silent', }) ));
 		app.use( vhost(cmd.hostname, handle404(compiler) ));
 		hostname = cmd.hostname;
 	} else {
-		app.use( middleware(compiler, { quiet: true }) );
+		app.use( middleware(compiler, { quiet: true, logLevel: 'silent', }) );
 		app.use( handle404(compiler) );
 	}
 	
@@ -68,7 +60,17 @@ const action = async (workspace, cmd) => {
 		}
 	});
 	server.listen(port);
-	console.log(`Server on http://${hostname}:${port}/`);
+
+	// TODO: need to update the compilation message if the port changes because it's allready taken
+	const message = port == 80
+					  ? `Ravendesk dev server at http://${hostname}/`
+					  : `Ravendesk dev server at http://${hostname}:${port}/`;
+
+	(new FriendlyErrorsWebpackPlugin({
+		compilationSuccessInfo: {
+			messages: [ message ]
+		}
+	})).apply(compiler);
 };
 
 module.exports = (program) =>
