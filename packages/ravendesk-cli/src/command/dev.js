@@ -1,4 +1,6 @@
 const middleware = require('webpack-dev-middleware'),
+		hotMiddleware = require('webpack-hot-middleware'),
+		webpack = require('webpack'),
 		express = require('express'),
 		http = require('http'),
 		path = require('path'),
@@ -31,7 +33,6 @@ const action = async (workspace, cmd) => {
 
 	const compiler = await setupCompiler(cmd.mode);
 	if(!compiler) return;
-
 	const app = express();
 
 	let hostname = 'localhost';
@@ -39,9 +40,22 @@ const action = async (workspace, cmd) => {
 		app.use( vhost(cmd.hostname, middleware(compiler, {}) ));
 		app.use( vhost(cmd.hostname, handle404(compiler) ));
 		hostname = cmd.hostname;
+
+		if(cmd.hot) {
+			//console.log(compiler.options);
+			//compiler.options.addEntry('webpack-hot-middleware/client');
+			const hotEntry = require.resolve('webpack/hot/dev-server');
+			(new webpack.HotModuleReplacementPlugin()).apply(compiler);
+			app.use(vhost(cmd.hostname, hotMiddleware(compiler) ));
+		}
 	} else {
 		app.use( middleware(compiler, {}) );
 		app.use( handle404(compiler) );
+			
+		if(cmd.hot) {
+			(new webpack.HotModuleReplacementPlugin()).apply(compiler);
+			app.use(hotMiddleware(compiler));
+		}
 	}
 	
 	let port = cmd.port;
@@ -67,6 +81,7 @@ const action = async (workspace, cmd) => {
 module.exports = (program) =>
 	program
 		.command('dev [workspace]')
+		.option('--hot', 'activate hot reloading', false)
 		.option('-m, --mode <mode>', 'production vs development build', 'development')
 		.option('-p, --port <port>', 'port to run the devserver on', 3000)
 		.option('-h, --hostname <host>', 'hostname to bind the devserver on')
