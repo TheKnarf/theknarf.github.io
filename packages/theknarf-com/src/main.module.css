@@ -7,7 +7,7 @@ body, a {
 	color: white;
 }
 
-.slogan {
+:global .slogan {
 	font-size: 10vw;
 }
 

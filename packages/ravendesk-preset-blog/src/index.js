@@ -1,5 +1,9 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+// style files regexes
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+
 module.exports = ({ config, mode }) => {
 	config.target = 'node';
 	config.externals = [ require('webpack-node-externals')() ];
@@ -36,7 +40,23 @@ module.exports = ({ config, mode }) => {
 				}
 			]
 		},
-		{ test: /\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader' ] },
+		{
+			test: cssModuleRegex,
+			use: [
+				MiniCssExtractPlugin.loader,
+				{
+					loader: 'css-loader',
+					options: {
+						modules: true,
+					},
+				}
+			]
+		},
+		{
+			test: cssRegex,
+			exclude: cssModuleRegex,
+			use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
+		},
 		{ test: /\.(png|jpg|jpeg|gif|svg)$/, loader: 'file-loader' },
 	];
 
