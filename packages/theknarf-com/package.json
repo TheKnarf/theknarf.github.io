@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": "true",
   "scripts": {
-    "build": "ravendesk build",
-    "dev": "ravendesk dev",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider ravendesk build",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider ravendesk dev",
     "deploy": "yarn run build && gh-pages --dist dist/ --branch master"
   },
   "license": "UNLICENSED",

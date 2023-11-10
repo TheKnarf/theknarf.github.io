@@ -16,7 +16,7 @@ export default <>
 			<img src={github} alt="github logo" />
 			<span>Github</span>
 		</a>
-		<a href={'http://experiments.' + config.domain}>Experiments</a>
-		<a href={'http://talks.' + config.domain}>Talks</a>
+		<a href='/experiments'>Experiments</a>
+		<a href='/talks'>Talks</a>
 	</div>
 </>;
