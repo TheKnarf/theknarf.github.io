@@ -17,7 +17,6 @@ export default <>
 			<span>Github</span>
 		</a>
 		<a href={'http://experiments.' + config.domain}>Experiments</a>
-		<a href={'http://notes.' + config.domain}>Notes</a>
 		<a href={'http://talks.' + config.domain}>Talks</a>
 	</div>
 </>;
