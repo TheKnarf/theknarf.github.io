@@ -13,6 +13,3 @@
 	path = packages/freesoftwa.re
 	url = git@github.com:TheKnarf/freesoftwa.re.git
 	branch = master
-[submodule "packages/packagemanagers"]
-	path = packages/packagemanagers
-	url = git@github.com:theknarf-notes/packagemanagers.git
