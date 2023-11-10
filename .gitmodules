@@ -1,7 +1,3 @@
-[submodule "packages/beerjs"]
-	path = packages/beerjs
-	url = git@github.com:TheKnarf/beerjs.github.io.git
-	branch = dev
 [submodule "packages/freesoftwa.re"]
 	path = packages/freesoftwa.re
 	url = git@github.com:TheKnarf/freesoftwa.re.git
