@@ -1,10 +1,20 @@
 {
+  "name": "theknarf-com",
+  "version": "1.0.0",
   "private": "true",
   "scripts": {
-    "cloc": " cloc packages --exclude-dir node_modules,dist,build"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider ravendesk build",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider ravendesk dev",
+    "deploy": "yarn run build && gh-pages --dist dist/ --branch master"
   },
   "license": "UNLICENSED",
-  "workspaces": [
-    "packages/*"
-  ]
+  "dependencies": {
+    "@ravendesk/cli": "https://gitpkg.now.sh/TheKnarf/RavenDesk/packages/ravendesk-cli?ab3de8a3a998ebc27ca2bb9d2630f91ac2dfbf1f",
+    "@ravendesk/preset-blog": "https://gitpkg.now.sh/TheKnarf/RavenDesk/packages/ravendesk-preset-blog?master",
+    "ravendesk-mdx-loader": "https://gitpkg.now.sh/TheKnarf/RavenDesk/packages/ravendesk-mdx-loader?master",
+    "gh-pages": "^2.1.1"
+  },
+  "resolutions": {
+    "ravendesk-mdx-loader": "https://gitpkg.now.sh/TheKnarf/RavenDesk/packages/ravendesk-mdx-loader?master"
+  }
 }

@@ -1,4 +1,0 @@
-[submodule "packages/freesoftwa.re"]
-	path = packages/freesoftwa.re
-	url = git@github.com:TheKnarf/freesoftwa.re.git
-	branch = master
