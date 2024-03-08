@@ -5,6 +5,6 @@ This is the source for https://theknarf.com/
 ## Development
 
 ```
-yarn
-yarn dev
+pnpm
+pnpm dev
 ```
