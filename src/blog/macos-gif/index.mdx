@@ -1,0 +1,42 @@
+---
+slug: macos-gif
+title: Make screenrecordings on MacOS into a GIF
+dateWritten: 2024-06-19
+---
+
+import img from './screen-recording-tool.png';
+
+# Make screenrecordings on MacOS into a Gif
+
+MacOS have a built inn screen recording feature, simply hit cmd+shift+5 and then select the `Record Selected Portion` in the toolbar that pops up.
+
+<img src={img} />
+
+Once done you’ll have a `.mov` file, this can be converted to a `.gif` with a simple Terminal command.
+
+First you’ll have to install two tools using Homebrew:
+
+```bash
+$ brew install ffmpeg gifsicle
+```
+
+Then you can add the following to your `.zshrc` file (I stole the code from a Github issue thread):
+
+```bash
+# Taken from: https://gist.github.com/SheldonWangRJT/8d3f44a35c8d1386a396b9b49b43c385?permalink_comment_id=4877711#gistcomment-4877711
+gif() {
+  output_file="${1%.*}.gif"
+  ffmpeg -y -i "$1" -v quiet -vf scale=iw/2:ih/2 -pix_fmt rgb8 -r 10 "$output_file" && gifsicle -O3 "$output_file" -o "$output_file"
+}
+```
+
+And finally by opening a terminal in the same folder as your `.mov` file you can run:
+
+```bash
+gif "./Screen Recording...mov" # Replace it with the actual filename
+```
+
+And this gives you a quick two step process to creating a gif:
+
+1. Hit cmd+shift+5 and make your recording
+2. Convert the file to gif in the terminal
