@@ -1,14 +1,29 @@
 {
-  "private": "true",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "echo 'no tests'"
   },
   "dependencies": {
-    "@astrojs/mdx": "^1.1.5",
-    "astro": "^3.5.4",
-    "gh-pages": "^2.1.1"
-  }
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "shiki": "^1.7.0"
+  },
+  "devDependencies": {
+    "@mdx-js/rollup": "^3.0.1",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "rehype-pretty-code": "^0.13.2",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^4.0.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-svgr": "^4.2.0"
+  },
+  "type": "module",
+  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
 }
