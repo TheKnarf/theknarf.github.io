@@ -1,4 +1,4 @@
-.body {
+header, footer, .home, .blogOverview {
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
@@ -9,8 +9,11 @@
 	min-width: 100px;
 }
 
-.outlet {
+.post {
 	font-size: 1.1rem;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
 
 	img {
 		max-width: 100%;

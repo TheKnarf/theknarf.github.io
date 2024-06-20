@@ -2,14 +2,14 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && ./ssg.tsx",
     "preview": "vite preview",
     "test": "echo 'no tests'"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1",
+    "react": "19.0.0-rc-e684ca66ab-20240619",
+    "react-dom": "19.0.0-rc-e684ca66ab-20240619",
+    "react-router": "0.0.0-nightly-d5ad0613b-20240620",
     "shiki": "^1.7.0"
   },
   "devDependencies": {
@@ -20,10 +20,12 @@
     "rehype-pretty-code": "^0.13.2",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
+    "stream-buffers": "^3.0.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
+    "vite-node": "^1.6.0",
     "vite-plugin-svgr": "^4.2.0"
   },
   "type": "module",
-  "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
 }

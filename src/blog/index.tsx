@@ -14,7 +14,7 @@ for (const modulePath in modules) {
 	const path = topLevelRoute + slug;
 
 	routes.push({
-		path,
+		path: slug,
 		element: createElement(modules[modulePath]?.default),
 	});
 
