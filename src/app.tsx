@@ -1,5 +1,5 @@
 import css from './app.module.css';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router';
 import { links as blogLinks } from './blog';
 
 const BlogPostsOverview = () => {
@@ -18,17 +18,25 @@ const BlogPostsOverview = () => {
 }
 
 export const Home = () => {
-	return <>
+	return <div className={css.home}>
 		<h2> Blog </h2>
 		<BlogPostsOverview />
-	</>;
+	</div>;
 }
 
 export const Blog = () => {
-	return <>
+	return <div className={css.blogOverview}>
 		<h2> Blog </h2>
 		<BlogPostsOverview />
-	</>;
+	</div>;
+}
+
+export const Post = () => {
+	return (
+		<div className={css.post}>
+			<Outlet />
+		</div>
+	);
 }
 
 const App = () => {
@@ -37,9 +45,7 @@ const App = () => {
 			<header>
 				<h1><NavLink to="/">TheKnarf</NavLink></h1>
 			</header>
-			<div className={css.outlet}>
-				<Outlet />
-			</div>
+			<Outlet />
 			<footer>
 				<hr />	
 				<span>Checkout my <a href="https://github.com/theknarf/">Github</a> profile</span>
