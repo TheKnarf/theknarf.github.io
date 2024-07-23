@@ -1,7 +1,8 @@
 import React from 'react';
-import css from './app.module.css';
 
-const Aside : React.FC = ({ children }) =>
+const Aside : React.FC<{
+  children?: React.ReactNode
+}> = ({ children }) =>
 	<aside>
     <div>
       <div>

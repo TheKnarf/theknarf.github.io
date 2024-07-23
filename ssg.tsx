@@ -1,4 +1,4 @@
-#!/usr/bin/env -S vite-node --script
+#!/usr/bin/env -S VITE_NODE=true vite-node --script
 //
 //  This file is distributed under the MIT License
 //
@@ -12,37 +12,36 @@ import { finished } from 'node:stream/promises';
 import React from 'react';
 import { WritableStreamBuffer } from 'stream-buffers';
 import { build, Plugin } from 'vite';
-import viteConfig from './vite.config.ts';
 import { resolve } from 'path';
 
 const routesToPaths = (routes, parentRoute = '') => {
-	return routes.flatMap(({ path, children }) => {
-		let currentPath = `${parentRoute}${path}`;
+  return routes.flatMap(({ path, children }) => {
+    let currentPath = `${parentRoute}${path}`;
 
-		// Remove special case where the path is two repeating slashes
-		currentPath = currentPath.replace(/(\/)+/g, '/');
-		// Remove trailing '*'
-		currentPath = currentPath.replace(/\*$/, '');
+    // Remove special case where the path is two repeating slashes
+    currentPath = currentPath.replace(/(\/)+/g, '/');
+    // Remove trailing '*'
+    currentPath = currentPath.replace(/\*$/, '');
 
-		if(typeof children !== 'undefined') {
-			return routesToPaths(children, currentPath);
-		}
+    if(typeof children !== 'undefined') {
+      return routesToPaths(children, currentPath);
+    }
 
-		return currentPath;
-	});
+    return currentPath;
+  });
 };
 
 const renderHtml = async (path, routes, mainScript) => {
   const { query, dataRoutes } = createStaticHandler(routes);
 
-	const url = new URL(path, 'http://localhost/')
+  const url = new URL(path, 'http://localhost/')
   url.search = '';
   url.hash = '';
   url.pathname = path;
 
-	const context = await query(new Request(url.href, {
-		signal: new AbortController().signal,
-	}));
+  const context = await query(new Request(url.href, {
+    signal: new AbortController().signal,
+  }));
 
   // If we got a redirect response, short circuit
   if (context instanceof Response) {
@@ -52,110 +51,120 @@ const renderHtml = async (path, routes, mainScript) => {
   const router = createStaticRouter(dataRoutes, context);
 
   const app = <html lang="en">
-		<head>
-			<meta charSet="UTF-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		</head>
-		<body>
-			<div id="root">
-				<React.StrictMode>
-					<StaticRouterProvider router={router} context={context} />
-				</React.StrictMode>
-			</div>
-			<script type="module" src={mainScript}></script>
-		</body>
-	</html>;
+    <head>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+      <div id="root">
+        <React.StrictMode>
+          <StaticRouterProvider router={router} context={context} />
+        </React.StrictMode>
+      </div>
+      <script type="module" src={mainScript}></script>
+    </body>
+  </html>;
 
-	const writableStream = new WritableStreamBuffer();
-	const { pipe } = renderToPipeableStream(app, {
-		onError(e) {
-			throw e;
-		},
-		onAllReady() {
-			pipe(writableStream);
-		}
-	});
+  const writableStream = new WritableStreamBuffer();
+  const { pipe } = renderToPipeableStream(app, {
+    onError(e) {
+      throw e;
+    },
+    onAllReady() {
+      pipe(writableStream);
+    }
+  });
 
-	await finished(writableStream);
-	return writableStream.getContentsAsString('utf8');
+  await finished(writableStream);
+  return writableStream.getContentsAsString('utf8');
 }
 
 const fileNameFromPath = (path) => {
-	let fileName = `${path}/index.html`;
+  let fileName = `${path}/index.html`;
 
-	fileName = fileName.replace(/(\/)+/g, '/');
-	fileName = fileName.replace(/^\//, '');
+  fileName = fileName.replace(/(\/)+/g, '/');
+  fileName = fileName.replace(/^\//, '');
 
-	fileName = resolve(__dirname, 'src', fileName);
+  fileName = resolve(__dirname, 'src', fileName);
 
-	return fileName;
+  return fileName;
 };
 
 function ssgPlugin({ routes, mainScript }) : Plugin {
-	const paths = routesToPaths(routes);
+  const paths = routesToPaths(routes);
 
-	return {
-		name: 'ssg-plugin',
+  return {
+    name: 'ssg-plugin',
 
-		// Add all routes in the `paths` array as chunks
-		buildStart() {
-			paths.forEach(path => {
-				const id = fileNameFromPath(path);					
+    // Add all routes in the `paths` array as chunks
+    buildStart() {
+      paths.forEach(path => {
+        const id = fileNameFromPath(path);					
 
-				this.emitFile({
-					type: 'chunk',
-					id,
-				});
-			});
+        this.emitFile({
+          type: 'chunk',
+          id,
+        });
+      });
 
-		},
+    },
 
-		// resolveId just matches up files that we later want to handle in load
-		// without it we don't get to load the files in this plugin
-		resolveId(id) {
-			const file = paths.find(path => {
-				const idFromPath = fileNameFromPath(path);					
-				return idFromPath === id;
-			});
+    // resolveId just matches up files that we later want to handle in load
+    // without it we don't get to load the files in this plugin
+    resolveId(id) {
+      const file = paths.find(path => {
+        const idFromPath = fileNameFromPath(path);					
+        return idFromPath === id;
+      });
 
-			if(file) {
-				return id;
-			}
-		},
+      if(file) {
+        return id;
+      }
+    },
 
-		// build page
-		async load( id ) {
-			const path = paths.find(path => {
-				const idFromPath = fileNameFromPath(path);					
-				return idFromPath === id;
-			});
+    // build page
+    async load( id ) {
+      const path = paths.find(path => {
+        const idFromPath = fileNameFromPath(path);					
+        return idFromPath === id;
+      });
 
-			if(path) {
-				return await renderHtml(path, routes, mainScript);
-			}
+      if(path) {
+        return await renderHtml(path, routes, mainScript);
+      }
 
-			return null;
-		},
-	};
+      return null;
+    },
+  };
 }
 
 try {
-	console.log("Running Vite build with SSG setup (Static site generation)\n");
+  console.log("Running Vite build with SSG setup (Static site generation)\n");
 
-	const routes = (await import('./src/routes')).default;
+  const routes = (await import('./src/routes')).default;
 
-	const ssgPluginConfig = {
-		routes,
-		mainScript: '/ssg-main.tsx',
-	}
+  // Hack so that we can have different options
+  // for vite-node and for the build under
+  process.env.VITE_NODE = false;
 
-	await build({
-		...viteConfig,
-		plugins: [
-			ssgPlugin(ssgPluginConfig),
-			...(viteConfig.plugins),
-		],
-	});
+  const ssgPluginConfig = {
+    routes,
+    mainScript: '/ssg-main.tsx',
+  }
+
+  const viteConfig = (await import('./vite.config.ts')).default;
+
+  let originalViteConfig =
+    typeof viteConfig == 'function' ? viteConfig() : viteConfig;
+
+  await build({
+    ...originalViteConfig,
+    plugins: [
+      ssgPlugin(ssgPluginConfig),
+      ...(originalViteConfig.plugins),
+    ],
+  });
 } catch(e) {
-	console.error(e);
+  console.error(e);
+  process.exit(1);
 }

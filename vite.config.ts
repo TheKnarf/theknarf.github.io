@@ -7,34 +7,48 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import remarkGfm from 'remark-gfm';
 import { remarkAlert } from 'remark-github-blockquote-alert';
+import { splitVendorChunkPlugin } from 'vite'
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
   theme: 'solarized-light',
 };
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  root: 'src',
-  build: {
-    outDir: '../dist',
-    emptyOutDir: true,
-  },
-  publicDir: '../public',
+export default defineConfig(() => {
+  const config = {
+    root: 'src',
+    build: {
+      outDir: '../dist',
+      emptyOutDir: true,
+    },
+    publicDir: '../public',
 
-  plugins: [
-    {enforce: 'pre', ...mdx({
-      remarkPlugins: [
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-        remarkGfm,
-        remarkAlert,
-      ],
-      rehypePlugins: [
-        [rehypePrettyCode, rehypePrettyCodeOptions],
-      ],
-    })},
-    svgr(),
-    react()
-  ],
+    plugins: [
+      splitVendorChunkPlugin(),
+      {enforce: 'pre', ...mdx({
+        remarkPlugins: [
+          remarkFrontmatter,
+          remarkMdxFrontmatter,
+          remarkGfm,
+          remarkAlert,
+        ],
+        rehypePlugins: [
+          [rehypePrettyCode, rehypePrettyCodeOptions],
+        ],
+      })},
+      svgr(),
+      react()
+    ],
+  };
+
+  if(process.env.VITE_NODE) {
+    config.ssr = {
+      noExternal: [
+        /* fix for ssg */
+        'react-tweet',
+      ]
+    };
+  }
+
+  return config;
 });

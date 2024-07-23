@@ -6,11 +6,10 @@ runs:
     - name: 'Setting up Node'
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version-file: '.node-version'
 
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 8
+    # Should pick pnpm verison based on `.packageManager` in package.json
+    - uses: pnpm/action-setup@v4
 
     - name: Install dependencies
       shell: bash
