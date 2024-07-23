@@ -7,7 +7,8 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import remarkGfm from 'remark-gfm';
 import { remarkAlert } from 'remark-github-blockquote-alert';
-import { splitVendorChunkPlugin } from 'vite'
+import { splitVendorChunkPlugin } from 'vite';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
@@ -25,6 +26,7 @@ export default defineConfig(() => {
 
     plugins: [
       splitVendorChunkPlugin(),
+      ViteImageOptimizer({}),
       {enforce: 'pre', ...mdx({
         remarkPlugins: [
           remarkFrontmatter,
