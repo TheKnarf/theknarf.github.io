@@ -5,29 +5,34 @@ import svgr from 'vite-plugin-svgr'; // https://github.com/pd4d10/vite-plugin-sv
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
+import remarkGfm from 'remark-gfm'
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
-	theme: 'solarized-light',
+  theme: 'solarized-light',
 };
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	root: 'src',
-	build: {
-		outDir: '../dist',
-		emptyOutDir: true,
-	},
-	publicDir: '../public',
+  root: 'src',
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
+  publicDir: '../public',
 
   plugins: [
-		{enforce: 'pre', ...mdx({
-			remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-			rehypePlugins: [
-				[rehypePrettyCode, rehypePrettyCodeOptions],
-			],
-		})},
-		svgr(),
-		react()
-	],
+    {enforce: 'pre', ...mdx({
+      remarkPlugins: [
+        remarkFrontmatter,
+        remarkMdxFrontmatter,
+        remarkGfm,
+      ],
+      rehypePlugins: [
+        [rehypePrettyCode, rehypePrettyCodeOptions],
+      ],
+    })},
+    svgr(),
+    react()
+  ],
 });
