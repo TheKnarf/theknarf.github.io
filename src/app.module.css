@@ -1,9 +1,16 @@
+:root {
+  --margin-note-width: 15rem;
+  --main-content-width: 60rem;
+
+  --content-width: calc(var(--main-content-width) + var(--margin-note-width));
+}
+
 html {
 	font-size: 20px;
 }
 
 header, footer, .home, .blogOverview {
-	max-width: 1200px;
+	max-width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -13,11 +20,13 @@ header, footer, .home, .blogOverview {
 	min-width: 100px;
 }
 
-.post {
-	max-width: 1200px;
+.postWrapper {
+	max-width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
+}
 
+.post {
 	img {
 		max-width: 100%;
 	}
@@ -49,6 +58,43 @@ header, footer, .home, .blogOverview {
 
     tr:nth-of-type(even) {
       background: #efefef;
+    }
+  }
+
+  /* relative to support margin notes / aside */
+  position: relative;
+  margin-right: var(--margin-note-width);
+
+  aside {
+    position: absolute;
+    float: right;
+    margin-left: 100%;
+    font-size: 0.8rem;
+    font-style: italic;
+    width: var(--margin-note-width);
+    padding-left: 1rem;
+    box-sizing: content-box;
+
+    /*
+     * Margins notes usually come at the end of a paragraph
+     * So we use this to move it up so that the lowest point
+     * of the margin note aligns with where the paragraph ends.
+     *
+     * <aside>
+     *  <div>
+     *    <div>
+     *      { children }
+     *    </div>
+     *  </div>
+     * </aside>
+     **/
+    & > div {
+      position: relative;
+
+      & > div {
+        position: absolute;
+        bottom: 0;
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ dateWritten: 2024-01-01
 
 import { Tweet } from 'react-tweet';
 import 'remark-github-blockquote-alert/alert.css';
+import Aside from '../../aside.tsx';
 
 # Test post
 
@@ -45,9 +46,13 @@ column 1|column 2
 testing that|tables work
 this is an GitHub Flavored Markdown extension|
 
-GFM should support footnotes[^1], ~strikethroughs~ and tasklists:
+GFM should support[^1] footnotes[^2], ~strikethroughs~ and tasklists:
 
-[^1]: Big note.
+[^1]: This is an example of a footnote.
+They can be written in the MDX right where you use them.
+But are automatically rendered in the bottom of the document.
+
+[^2]: Easily add as many footnotes as needed.
 
 * [ ] Task 1
 
@@ -71,8 +76,14 @@ Links are automatically turned into links: www.google.com
 > [!WARNING]
 > Urgent info that needs immediate user attention to avoid problems.
 
+<Aside>
+
+Using an github alert in a margin note
+
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
+
+</Aside>
 
 
 ## MDX and React components
@@ -98,3 +109,24 @@ import { Tweet } from 'react-tweet';
 
 <Tweet id="1683920951807971329" />
 
+## Margin notes
+
+Margin notes (often also called side notes) is a common things in physically written text, where (often studens) will take notes on a handout in the margins on the side.
+This might serve as an alternative to footnotes.
+
+<Aside>And this is the margin note. Margin notes might be nice to write additional info that a reader might want to note.</Aside>
+
+You should to the right of the paragraph above see a margin note.
+Having two margin notes to close together might make them overlap.
+I don't have a solution for overlap since I currently just `float` them to the right.
+
+<Aside>
+
+Second aside in the same section.
+I'll have to manually ensure that they don't overlap.
+
+</Aside>
+
+I could perhaps using a React portal and CSS Grid create a section for margin notes.
+But this brings its own problems; like how to I align it up with the main content?
+Margin notes should be coupled to a given section.

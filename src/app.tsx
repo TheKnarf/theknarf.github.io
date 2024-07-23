@@ -33,8 +33,10 @@ export const Blog = () => {
 
 export const Post = () => {
 	return (
-		<div className={css.post}>
-			<Outlet />
+		<div className={css.postWrapper}>
+      <div className={css.post}>
+        <Outlet />
+      </div>
 		</div>
 	);
 }
