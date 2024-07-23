@@ -1,0 +1,78 @@
+---
+slug: post1
+title: Test post
+dateWritten: 2024-01-01
+---
+
+import { Tweet } from 'react-tweet';
+
+# Test post
+
+The intention of this post is simply to test syntax and embeddings in a blogpost.
+This webpage is a React app being built with a custom Vite SSG plugin that I made for the blog.
+Each blog post is its own MDX file, supporting normal things that you can do in Markdown (like **bold**, _italic_, `code`, etc).
+
+Each blog post also have its own frontmatter section:
+
+```yml
+---
+slug: post1
+title: Test post
+dateWritten: 2024-01-01
+---
+
+# Test post
+```
+
+Using a plugin this gets converted into an export statement during parse:
+
+
+```js
+export const frontmatter = {
+  slug: 'post1',
+  title: 'Test post',
+  dateWritten: '2024-01-01',
+};
+
+# Test post
+```
+
+## Tables
+
+column 1|column 2
+--------|--------
+testing that|tables work
+this is an GitHub Flavored Markdown extension|
+
+GFM should support footnotes[^1], ~strikethroughs~ and tasklists:
+
+* [ ] Task 1
+
+* [x] Task 2
+
+Links are automatically turned into links: www.google.com
+
+## MDX and React components
+
+Since each post is an MDX file/component then I should be able to simply import and use React components.
+So adding a tweet preview is as easy as:
+
+```bash
+pnpm add react-tweet
+```
+
+And then import and use it:
+
+```jsx
+import { Tweet } from 'react-tweet';
+
+# Test post
+
+## MDX and React components
+
+<Tweet id="1683920951807971329" />
+```
+
+<Tweet id="1683920951807971329" />
+
+[^1]: Big note.

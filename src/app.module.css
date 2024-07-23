@@ -1,3 +1,7 @@
+html {
+	font-size: 20px;
+}
+
 header, footer, .home, .blogOverview {
 	max-width: 1200px;
 	margin-left: auto;
@@ -10,7 +14,6 @@ header, footer, .home, .blogOverview {
 }
 
 .post {
-	font-size: 1.1rem;
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
@@ -31,4 +34,21 @@ header, footer, .home, .blogOverview {
 	pre [data-line] {
 		padding: 0 1rem;
 	}
+
+  table {
+    border-spacing: 0;
+
+    thead {
+      background: lightgrey;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 0.4rem 1.1rem;
+    }
+
+    tr:nth-of-type(even) {
+      background: #efefef;
+    }
+  }
 }
