@@ -5,6 +5,7 @@ dateWritten: 2024-01-01
 ---
 
 import { Tweet } from 'react-tweet';
+import 'remark-github-blockquote-alert/alert.css';
 
 # Test post
 
@@ -46,11 +47,33 @@ this is an GitHub Flavored Markdown extension|
 
 GFM should support footnotes[^1], ~strikethroughs~ and tasklists:
 
+[^1]: Big note.
+
 * [ ] Task 1
 
 * [x] Task 2
 
 Links are automatically turned into links: www.google.com
+
+> this is an example quote &mdash; _by me_
+
+## Github flavored Alerts
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
 
 ## MDX and React components
 
@@ -75,4 +98,3 @@ import { Tweet } from 'react-tweet';
 
 <Tweet id="1683920951807971329" />
 
-[^1]: Big note.

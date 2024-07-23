@@ -3,9 +3,10 @@ import react from '@vitejs/plugin-react-swc';
 import mdx from '@mdx-js/rollup'
 import svgr from 'vite-plugin-svgr'; // https://github.com/pd4d10/vite-plugin-svgr
 import rehypePrettyCode from 'rehype-pretty-code';
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
-import remarkGfm from 'remark-gfm'
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import remarkGfm from 'remark-gfm';
+import { remarkAlert } from 'remark-github-blockquote-alert';
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
@@ -27,6 +28,7 @@ export default defineConfig({
         remarkFrontmatter,
         remarkMdxFrontmatter,
         remarkGfm,
+        remarkAlert,
       ],
       rehypePlugins: [
         [rehypePrettyCode, rehypePrettyCodeOptions],
