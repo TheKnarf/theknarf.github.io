@@ -1,5 +1,5 @@
 import css from './app.module.css';
-import { Outlet, NavLink } from 'react-router';
+import { Outlet, NavLink, useMatches } from 'react-router';
 import { links as blogLinks } from './blog';
 import { links as gardenLinks } from './garden';
 
@@ -64,9 +64,18 @@ export const Blog = () => {
 }
 
 export const Post = () => {
+  const matches = useMatches();
+  const frontmatter = (matches as any).at(-1).handle.frontmatter;
+	const { title, dateWritten } = frontmatter;
+
 	return (
 		<div className={css.postWrapper}>
       <div className={css.post}>
+        <title>{title}</title>
+        <h1>{title}</h1>
+        <div className={css.postMeta}>
+          <span>Written on {dateWritten}</span>
+        </div>
         <Outlet />
       </div>
 		</div>

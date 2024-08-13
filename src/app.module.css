@@ -49,6 +49,13 @@ header {
 }
 
 .post {
+  .postMeta {
+    font-style: italic;
+    color: grey;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+
 	img {
 		max-width: 100%;
 	}

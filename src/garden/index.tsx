@@ -10,12 +10,16 @@ const links = [];
 const topLevelRoute = 'garden/';
 
 for (const modulePath in modules) {
-	const { slug, title, dateWritten } = modules[modulePath]?.frontmatter;
-	const path = topLevelRoute + slug;
+  const frontmatter =  modules[modulePath]?.frontmatter;
+	const { slug, title, dateWritten } = frontmatter;
+  const path = topLevelRoute + slug;
 
 	routes.push({
 		path: slug,
 		element: createElement(modules[modulePath]?.default),
+    handle: {
+      frontmatter,
+    },
 	});
 
 	links.push({
