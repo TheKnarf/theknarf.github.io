@@ -8,7 +8,7 @@ const GardenOverview = () => {
 		<div className={css.posts}>
       <ul>
       {
-        (gardenLinks || []).map(({ title, dateWritten, link }) => (
+        (gardenLinks || []).map(({ title, link }) => (
           <li key={link}>
             <NavLink to={link}>{title}</NavLink>
           </li>
