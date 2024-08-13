@@ -1,0 +1,63 @@
+---
+slug: music-as-code
+title: Music as Code
+dateWritten: 2024-08-13
+---
+
+# Music as Code
+
+## Idea
+
+I'd like to be able to make music using code.
+It sounds like it would be a good idea to be able to share
+composing techniques as re-usable functions,
+to describe the rythm section declerativly,
+to experiment with different musical keys, scales and modes by changing a few lines of code.
+
+### As a live instrument for performance
+
+A lot of the tools I've found seem to fill the nitch of being used for live performance.
+Either by actually live coding during the performance, or as a custom instrument develeoped ahead of time.
+
+### As a live instrument for games
+
+I also think it would be interesting with more games where the music is dynamic.
+A lot of games will ramp up the intensity when a difficult enemy arrives.
+Or have sudden variations on the theme to not seem to repetitive.
+As far as I know these are all done ahead of time and "compiled" to static music files (wav / ogg),
+but what if they could instead just be a program that reacts dynamicly to the game?
+
+In a similare vein there are so much interesting things that can be done with synths these days,
+but again I don't know of any games that feed what happens in a game live into the synth.
+
+## Tools
+
+Her is a list of the tools and libraries I've found.
+A lot of these can be used both to create synths as well as whole songs.
+
+Tool | Description
+-----|-------------
+[Supercollider](https://supercollider.github.io/)|Programming language for "audio synthesis and algorithmic composition"
+[Pure Data](https://puredata.info/)|One of the original tools in this space from way back. Eventually became Abelton's Max for Live
+[Purr Data](https://www.purrdata.net/)|A modern fork of Pure Data
+[Plugdata](https://plugdata.org/)|Another more modern fork of Pure Data
+[Tidal Cycles](https://tidalcycles.org/)|
+[Strudel](https://github.com/tidalcycles/strudel)|A port of TidalCycles to JavaScript
+[Csound](https://csound.com/)|
+[Sonic Pi](https://sonic-pi.net/)|
+
+Other tools:
+
+- [Heavy Compiler Collection (hvcc)](https://github.com/Wasted-Audio/hvcc) - `hvcc` is a python-based dataflow audio programming language compiler that generates C/C++ code and a variety of specific framework wrappers.
+
+- [Camomile](https://github.com/pierreguillot/Camomile) - Create audio plugins with Pure Data patches.
+
+- [SunVox library](https://warmplace.ru/soft/sunvox/sunvox_lib.php)
+
+## Hardware
+
+- [Zynthian](https://zynthian.org/) - RaspberryPI-based open synth platform
+
+- [ElectroSmith's Daisy](https://electro-smith.com/) - DSP chip for building your own synths. Used by the [CHOMPI Sampler](https://chompiclub.com/products/chompi)
+
+- [Monome's Norns](https://monome.org/docs/norns/) - a small, portable, open-source sound computer that dynamically runs scripts and DSP.
