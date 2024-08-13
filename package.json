@@ -4,6 +4,9 @@
     "dev": "vite",
     "build": "tsc && ./ssg.tsx",
     "preview": "vite preview",
+    "hooks:enable": "git config core.hooksPath .hooks",
+    "hooks:disable": "git config --unset core.hooksPath",
+    "hooks:status": "if [ \"$(git config core.hooksPath)\" == \".hooks\" ]; then echo 'Git hooks is enabled'; else echo 'git hooks is disabled'; fi",
     "test": "echo 'no tests'"
   },
   "dependencies": {

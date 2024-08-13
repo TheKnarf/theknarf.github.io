@@ -7,6 +7,12 @@ pnpm install
 pnpm dev
 ```
 
+To activate Git pre-commit hook:
+
+```
+pnpm hooks:enable
+```
+
 ## TODO
 
 ### Must haves
