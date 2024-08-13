@@ -26,8 +26,15 @@ export const Garden = () => {
       A garden is a form of personal wiki that grows over time.
       Unlike a blog its not sorted by publication date,
       instead its a set of loosly organized pages that link between each other.
+      Maggie Appleton have a <a href="https://maggieappleton.com/garden-history">good article around the idea of a digital garden</a>.
     </p>
     <GardenOverview />
+    <h3> Other gardens </h3>
+    <p> Here is a list of some other people's digital garden that I find interesting: </p>
+    <ul>
+      <li><a href="https://maggieappleton.com/">Maggie Appleton</a></li>
+      <li><a href="https://szymonkaliski.com/">Szymon Kaliski</a></li>
+    </ul>
 	</div>;
 }
 
