@@ -1,0 +1,66 @@
+---
+slug: smarthome
+title: Smarthome
+dateWritten: 2024-09-24
+---
+
+# Smarthome
+
+I keep playing with smarthome devices.
+Some seems to increase my quality of life,
+but often it also leads to extra debugging headache when stuff stops working.
+
+## Hub & Protocols
+
+To start with you want to pick a protocol for your smarhome devices,
+and a hub that supports that protocol.
+
+There are 3 major protocols that exists for smarthome devices:
+
+- Zigbee
+
+  _This is the protocol I went for. This is what IKEA uses for their smart devices, as well as Phillips Hue and a lot of other compaines._
+
+- Z-Wave
+
+  _It's my understanding that this protocol is more common in the US, as I live in Europe I'll stick to Zigbee._
+
+- Wifi
+
+  _Some devices simply uses Wifi, this is a bit annoying. I'd like to avoid this as much as possible. I still own some, but these I bought for other reasons than their smart capabilities, and they just happened to have Wifi built inn._
+
+There are multiple hubs that support Zigbee,
+each provider got its own (Ikea, Phillips, etc).
+The neat thing about Zigbee is that you don't need to get an individual smarthub from each of the brands you own,
+they should all work with eachother,
+so you can simply get a single smarthub.
+
+I wanted to use a Raspberry PI as my smarthub.
+My first solution for a few years was getting [RaspBee II](https://phoscon.de/en/raspbee2) hat for the Raspberry PI,
+this worked well for several years until my Raspberry PI was starting to have some hardware failures.
+SD-Cards never lasts forever and so when upgrading I wanted to get a Raspberry PI that works with a M.2 SSD.
+
+My next smarthub was a [Home assistant Yellow](https://www.home-assistant.io/yellow/).
+This works with a Raspberry PI Compute module, let's you use a M.2 SSD as boot drive,
+and have built inn support for Zigbee.
+This has worked great and is my current smarthub.
+
+## Zigbee devices
+
+- Lighting from IKEA. They are cheap and mostly works well, I currently have one light that have disconnected that I need to reset and reconnect. But most of the time they mostly works.
+
+- Motion sensor from IKEA. This one is mounted in the hallway and turns on the light automatically in the hallway when I leave or come home. This works like 75% of the time (which is really annoying when it don't).
+
+- Aqara Temperature and Humidty sensor. Got 3 of them. These worked great at the start when using the RaspBee II hat for the Raspberry PI, but when upgrading to the Home Assistant Yellow I never got them to reconnect. It may just be a dead battery? Or maybe I didn't manage to trigger the reconnect modus correctly. This will be a task for another day.
+
+- Namron panelovn ZigBee. This one have been great and worked solidly. I love having heating that I can turn on and off remotly when traveling.
+
+I also got some buttons from IKEA that never worked.
+
+## Future
+
+- [ ] I'd love to get some [air quality sensors](/garden/indoor-air-quality/) connected to my smarthub
+
+- [ ] I got a portable Air conditioning unit that connects over Wifi, but there is no point in connecting that up since I'll have to open a door or window and throw the hose out before turning it on. I'd love a more permanent solution for Air conditioning.
+
+- [ ] Try and change battery / reset / reconnect the devices that currently doesn't work.
