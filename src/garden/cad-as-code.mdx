@@ -1,0 +1,43 @@
+---
+slug: cad-as-code
+title: CAD as Code
+dateWritten: 2024-09-24
+---
+
+# CAD as Code
+
+I’d like better code-first CAD software. The most well known example is OpenSCAD.
+It however have its own Domain Spesific Programming language that I’m not a fan of.
+There are two types of DSL’s; External- and Embedded-DSL’s.
+OpenSCAD is an example of an External DSL, it is its own programming language.
+I’m much more fan of embedded DSL’s aka just a library in you programming language of choice.
+
+Having your code-first CAD software as a part of your programming language of choice means that you can use all the different libraries that are already available in your langauge.
+Need to generate models based on a custom JSON file? Easy, just parse the JSON file.
+Need for that JSON to come over an API? Just use a fetch call.
+Want to build a webpage that previews your models while allowing you do change some spesific parameters so that your endusers can download a custom model ready to print.
+Easy, just use React and React-three-fiber and build a simple UI.
+
+These kind of things aren’t easy to do with something like OpenSCAD.
+Given the examples I had in the previous paragraph you might have gotten at my second point: I want that programming language to be JavaScript / TypeScript.
+While JS / TS might not be the fastest langauge, it is the most flexible to build both web apps that can span both frontend logic and backend logic (with something like Node or Bun).
+And you don’t have to write the CAD kernel itself in JS / TS, instead that can be written in "_whatever_" and compiled to WASM.
+
+So what kind of solutions does that leave us?
+
+## Requirements
+
+Stuff I want from a CAD library:
+
+- To be Open Source / Free Software
+- To be written in a compiled language and compiled to WASM
+    - Preferably Rust
+- To have high-level libraries in JavaScript / TypeScript
+    - To use React components (react reconsiler) as its DSL
+    - To be able to use with React Three Fiber
+- To be able to use from a Node and a CLI
+    - To be able to run in Docker
+
+> [!NOTE]
+> TODO: add list of libraries that I know of and other related resources
+
