@@ -10,8 +10,8 @@
     "test": "echo 'no tests'"
   },
   "dependencies": {
-    "react": "19.0.0-rc-e684ca66ab-20240619",
-    "react-dom": "19.0.0-rc-e684ca66ab-20240619",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-router": "0.0.0-nightly-d5ad0613b-20240620",
     "react-tweet": "^3.2.1",
     "shiki": "^1.7.0"

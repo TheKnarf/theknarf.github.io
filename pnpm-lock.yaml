@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       react:
-        specifier: 19.0.0-rc-e684ca66ab-20240619
-        version: 19.0.0-rc-e684ca66ab-20240619
+        specifier: 19.0.0
+        version: 19.0.0
       react-dom:
-        specifier: 19.0.0-rc-e684ca66ab-20240619
-        version: 19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619)
+        specifier: 19.0.0
+        version: 19.0.0(react@19.0.0)
       react-router:
         specifier: 0.0.0-nightly-d5ad0613b-20240620
-        version: 0.0.0-nightly-d5ad0613b-20240620(react-dom@19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619))(react@19.0.0-rc-e684ca66ab-20240619)
+        version: 0.0.0-nightly-d5ad0613b-20240620(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-tweet:
         specifier: ^3.2.1
-        version: 3.2.1(react-dom@19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619))(react@19.0.0-rc-e684ca66ab-20240619)
+        version: 3.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       shiki:
         specifier: ^1.7.0
         version: 1.7.0
@@ -1262,10 +1262,10 @@ packages:
   property-information@6.5.0:
     resolution: {integrity: sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig==}
 
-  react-dom@19.0.0-rc-e684ca66ab-20240619:
-    resolution: {integrity: sha512-xjS2PN6oJkB5OHwv1fA1MgC1ZIIY/XYXKq62EXSiopNR2H338WOtpzy2ZVzOgzhZvXrQloWA10hNljiZsRnLPQ==}
+  react-dom@19.0.0:
+    resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
-      react: 19.0.0-rc-e684ca66ab-20240619
+      react: ^19.0.0
 
   react-router@0.0.0-nightly-d5ad0613b-20240620:
     resolution: {integrity: sha512-zVIHU6eyD+EQwOncUfBsFXV/qjs+aF0avwOOPRniunti999sfXyKKVkPG2sOJeveook0y/se4S4QRfKUXk9kdA==}
@@ -1283,8 +1283,8 @@ packages:
       react: '>= 18.0.0'
       react-dom: '>= 18.0.0'
 
-  react@19.0.0-rc-e684ca66ab-20240619:
-    resolution: {integrity: sha512-4qgXbyT2NSq23YEUu9ogVgQZJabgYjNudw3v4NqouWJKC5OODX1AtYXjzrqH6KKNRjwIu5D2Tvpmtg216qmQEQ==}
+  react@19.0.0:
+    resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
     engines: {node: '>=0.10.0'}
 
   rehype-parse@9.0.0:
@@ -1330,8 +1330,8 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
-  scheduler@0.25.0-rc-e684ca66ab-20240619:
-    resolution: {integrity: sha512-pojzCFWJ8YVWcOWmZg7EfMyLebCpDUzslBYJvIMaeeIZZ5Dg2NO0NTRkxwllUkjv4Nr3sB1x8DAT/Y+xlCse2w==}
+  scheduler@0.25.0:
+    resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -2946,27 +2946,27 @@ snapshots:
 
   property-information@6.5.0: {}
 
-  react-dom@19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619):
+  react-dom@19.0.0(react@19.0.0):
     dependencies:
-      react: 19.0.0-rc-e684ca66ab-20240619
-      scheduler: 0.25.0-rc-e684ca66ab-20240619
+      react: 19.0.0
+      scheduler: 0.25.0
 
-  react-router@0.0.0-nightly-d5ad0613b-20240620(react-dom@19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619))(react@19.0.0-rc-e684ca66ab-20240619):
+  react-router@0.0.0-nightly-d5ad0613b-20240620(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      react: 19.0.0-rc-e684ca66ab-20240619
+      react: 19.0.0
       turbo-stream: 2.2.0
     optionalDependencies:
-      react-dom: 19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619)
+      react-dom: 19.0.0(react@19.0.0)
 
-  react-tweet@3.2.1(react-dom@19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619))(react@19.0.0-rc-e684ca66ab-20240619):
+  react-tweet@3.2.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@swc/helpers': 0.5.12
       clsx: 2.1.1
-      react: 19.0.0-rc-e684ca66ab-20240619
-      react-dom: 19.0.0-rc-e684ca66ab-20240619(react@19.0.0-rc-e684ca66ab-20240619)
-      swr: 2.2.5(react@19.0.0-rc-e684ca66ab-20240619)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      swr: 2.2.5(react@19.0.0)
 
-  react@19.0.0-rc-e684ca66ab-20240619: {}
+  react@19.0.0: {}
 
   rehype-parse@9.0.0:
     dependencies:
@@ -3071,7 +3071,7 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.18.0
       fsevents: 2.3.3
 
-  scheduler@0.25.0-rc-e684ca66ab-20240619: {}
+  scheduler@0.25.0: {}
 
   semver@6.3.1: {}
 
@@ -3143,11 +3143,11 @@ snapshots:
 
   svg-parser@2.0.4: {}
 
-  swr@2.2.5(react@19.0.0-rc-e684ca66ab-20240619):
+  swr@2.2.5(react@19.0.0):
     dependencies:
       client-only: 0.0.1
-      react: 19.0.0-rc-e684ca66ab-20240619
-      use-sync-external-store: 1.2.2(react@19.0.0-rc-e684ca66ab-20240619)
+      react: 19.0.0
+      use-sync-external-store: 1.2.2(react@19.0.0)
 
   to-fast-properties@2.0.0: {}
 
@@ -3211,9 +3211,9 @@ snapshots:
       escalade: 3.1.2
       picocolors: 1.0.1
 
-  use-sync-external-store@1.2.2(react@19.0.0-rc-e684ca66ab-20240619):
+  use-sync-external-store@1.2.2(react@19.0.0):
     dependencies:
-      react: 19.0.0-rc-e684ca66ab-20240619
+      react: 19.0.0
 
   vfile-location@5.0.2:
     dependencies:
