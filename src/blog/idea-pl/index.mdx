@@ -1,0 +1,335 @@
+---
+slug: idea-pl
+title: Make my own programming language
+tags:
+  - idea
+dateWritten: 2025-02-05
+---
+
+It's a bit of a rite of passage for software developers to eventually create their own programming language.
+It might start out like PHP as a small scripting language for creating their website,
+as a toy language ment as a learning exercise,
+or intended as the next big thing.
+
+I've naturally developed a lot of ideas and opinions about programming language design after having been a software developer for quite a few years.
+This blog post is intended as a place for me to throw a lot of ideas at the wall for what I would like to see in a programming language if I ever end up trying to make my own.
+
+## Compiled vs interpreted/JIT, why not both?
+
+The game developer Jonathan Blow talks about how there are two different modes you're inn when programming.
+There is development-mode where your writing the program,
+in this mode interactivity and small response time is imperative.
+You figure out how to write a program by writing it, its a progress, so being able to try out stuff
+and see what works and what don't is important.
+As such you want a system thats responsive,
+where you can quickly see the results of your changes to evaluate if this is what you want.
+
+Interpreted / JIT-compiled langauges, often called "scripting languages", excell at this.
+You get to quickly see your changes as there is either no compile time,
+or a very quick compile time in the case of something like TypeScript+Vite.
+Even more so when it comes to web-development where you often have hot-reloading code as well,
+so the code updates while the program is running without you needing to restart the program.
+
+This is not only usefull in web-development,
+but also in Game development,
+the creation of Desktop and Mobile apps,
+or I'd argue in all of software development.
+
+The other mode is release-mode,
+when you want to produce an downloadable executable or deployable artefact.
+Here you don't really care how long it takes, as long as its within reason.
+You usually offload this process to a dedicated build server.
+So in this mode the compiler can take some extra time to optimize the code with every trick in the book.
+
+As such I think it would be usefull with a programming language that supports both compilation to native code,
+and a dev-mode that runs the code either interpreted or JIT-compiled (or a mix).
+Combine this with built inn support for hot-reloadability and I think you'll have the basis for a language developers will love and be productive inn.
+
+### Bootstrapping & self-hosting compiler
+
+One often talk about bootstrapping programming languages.
+You're developing a language that you want to code inn, so it would be a shame to have to write the interpreter/compiler inn a different language.
+Of course its not imidiatly possible to implement an interpreter/compiler in a langauge that does not exist.
+Instead you have to first implement a version of your programming langauge in an already established language.
+
+In my language I would like for the interpreter/jit-compiler to be written in Rust,
+and for the compiler to be written in the language itself and shipped as a part of the standard library.
+
+In the same way that you in languages like JavaScript can run `eval("some_js_code()")` I would like for my language
+to have a `compile(name_of_main_function)` thats a part of the standard library.
+
+This would allow developers to write build scripts in the language itself,
+instead of needing a `Makefile` or something similar.
+
+It would also mark a clear deviding line between whats written in Rust and whats written in the langauge itself.
+
+## Dynamic typing, static typing and Gradual typing
+
+I see no reason why a programming language can't support both static and dynamic typing.
+It's a bit of a misnomer to call them opposites as they really talk about two completly different things.
+
+Dynamic typing is all about run-time-types,
+its just a fancy way of saying that every instanciated variable also have an enum that keeps track of what type it is.
+There is no reason why a programming language couldn't support both having "untyped dynamic variables" as well as "statically compile-time typed variables".
+
+Authors often talk about two different modes of working, writing-mode and editing-mode.
+In writing mode its all about getting words out of your head and into Word / onto paper.
+In this mode you don't care about spelling mistakes, the flow of your sentences, or really anything else than getting your ideas out of your head.
+
+In editing mode you can go over and fix mistakes and rewrite stuff as much as you want.
+This is a much more mechanical and logical work, thats about improving the quality of the work.
+
+Its important that one seperates these two,
+if you become a perfectionist when writing then you will make it incredible hard for yourself to write at all.
+Instead once something is written you can take your time editing it afterwards.
+
+Similarly in programming we often say "make it work, then make it pretty / fast / safe".
+You have to prove that your idea actually works before you worry about all the other details.
+So in writer-mode or coder-mode you can write the "first-draft" of your code that works,
+and then afterward in editor-mode you can refactor, handle error-cases, write documentation, etc.
+
+Dynamic typing makes it easier to get that first draft of a program written.
+As such I think its increadibly useful for fast iteration times.
+
+On the other hands static-typing is amazing for refactoring,
+nothing improves my belife that I've correctly refactored something in a way that it still works like working in Rust.
+
+As such I would like a Gradual type system like Rust that allows you to mix dynamic- and static-typing,
+in combination with a "strict mode" that produces linter warnings.
+
+## To GC or not to GC
+
+Programming langauge that support Garbage Collection are quicker to write in and easier to maintain.
+Rust proves that you can do without it and still have correct programs,
+but you'll have to bend everything into the shape that Rust enforces.
+While this is great in a finnished program, it may hinder the initial development time.
+As above I think GC is really useful when writing the "first-draft",
+but it might also be nice to be able to mix GC and non-GC code.
+
+One reason that one might not want GC code is to avoid GC-hickups where the GC stops
+the program to run garbage collection.
+This can be especially noticable when writing games where code run in a thight loop.
+
+But that doesn't mean that your whole program needs to be free of GC,
+while you might want the game-loop to be GC-free you probably don't care if the
+code running the main-menu or pause-menu of the game uses GC.
+As such being able to write code that contain a mix of GC and non-GC code could be really usefull.
+
+Similar to how Rust have `unsafe` blocks I imagine that having `GC` and `Non-GC` blocks in the code
+could be nice.
+This would allow the compiler to enforce that you don't have any GC code in critical paths.
+
+## Serilize/deserialize in the standard library
+
+I'm not sure why the trait definitions for Rust's Serde isn't just in the standard library,
+seems like that would be useful,
+so thats what I'd like for my own language.
+
+I also think that JSON is used so much that a serializer/deserializer for it should be there.
+
+Either that or the langauge should offer some other default serializer/deserializer for its types.
+
+## Table-types
+
+Tables are useful, they can be stored either in row-form or column-form.
+I'm not sure why more languages don't have a default type for Table's in the language.
+On the top of my mind the only one I can think of is how C# have LINQ built inn.
+
+## Effects
+
+Effect systems seems nice.
+It allows you to implement a lot of stuff in the standard library, keeping the core langauge leaner.
+
+Effect systems can be used to implement:
+
+- Async-await
+- Exception systems
+- Dependency injection
+  - This also means that you can reuse code between the app and tests just by wrapping it in two different effect-handlers. In the tests you can have effect-handlers that mock out part of the functionallity.
+- [React-like hooks](https://overreacted.io/algebraic-effects-for-the-rest-of-us/)
+
+And can be used to provide standard interfaces for stuff like Logging, etc.
+
+I also imagine that it could be used to implement `import-statements` and `hot reloading` by making
+the module system built on top of effects.
+
+### Co-effects
+
+I don't really know what co-effects are...
+I think its about having types that talks about the enviroment the program runs in?
+
+So maybe like one type for if its running on Linux vs MacOS?
+That sounds like it could be usefull.
+Rust sticks this kind of thing in macros, but maybe having it in the typesystem could be more ergonomic.
+
+Honestly anything that can be solved without macros seems like a good solution.
+Macros are almost always an untyped and unsound mess.
+
+## JSX syntax
+
+The JSX syntax introduced in JavaScript / TypeScript is great!
+Its a really ergonomic way of building composable functions that produces some kind of three structure.
+
+Under the hood its just syntactic sugar, so its really easy to implement.
+Its one of those modern inventions that I imagine that all future langauges would implement.
+Similar to the invention of interfaces / traits.
+
+JSX takes code in the form of
+```js
+// from:
+<Functionname arg1="a" arg2="b">{childvariable}</Functionname>
+
+// into the form of:
+dom(Functionname, { arg1: "a", arg2: "b" }, childvariable);
+```
+Thats really all it does.
+
+In my language the `dom` wrapper function could be an effect.
+The `useState` and `useEffect` hooks that one is used to from React could also just be effects.
+
+JSX syntax have shown to be a really ergonomic way of building websites (with React),
+mobile apps (with React Native), 3D apps (with react-three-fiber), terminal apps (with Ink),
+desktop apps (with React Native for Windows), and so much more.
+
+It can be used for anything that can be represented as a three-datastructure,
+thats alot of stuff in programming.
+
+Fictional example:
+
+```js
+import { Dom } from 'std';
+import { runner } from 'amazing-librarary-something';
+
+const Window = ({ name, width, height }) => {
+  // ...
+}
+
+const App = () => {
+  return (
+    <Window name="My program" width={800} height={600} />
+  );
+}
+
+const Runtime = () => {
+  effect {
+    runner(App);
+  } handle {
+    Dom(func, args, children) => {
+      // handeling the dom wrapper calls
+    }
+  }
+}
+
+```
+
+## zod-like type definitions
+
+I like the way the library [zod](https://zod.dev/) allows you define types that double as parsers/validators.
+I think something like that should be built inn to the standard library of my language.
+
+I imagine that we could use that for all type definitions in the language.
+Lips-/scheme-like programming languages often do something similar.
+
+Since the intention is for the compiler to just be a set of functions in the standard library,
+then type definitons could be so as well.
+
+This also means that you can construct new types in code by composing helper functions,
+something I haven't seen in any other langauge before.
+Usually types are imagined to be constructed "at compile time" seperate from the rest of the program.
+But this means that we often have to do with code genneration and/or compile time macros to produce parts of the code.
+These systems often forces one to introduce external build systems (like a Makefile) around the program since we now
+need to run the code generator before compiling the program.
+
+If types were constructed at run time then we won't need this,
+instead that can just be a part of the code that runs in the build script and gets passed to the `compile` function.
+The same goes for the type-checker.
+
+You could imagine a build script in our hypotetical language maybe looks something like this:
+
+```js
+import { typecheck, compile, hot_reload, HotReload } from 'std:comp';
+import { console, is_dev, env, Exception, Log, Dev } from 'std';
+import { main_loop, types } from './main';
+
+const runtime = () => {
+  effect {
+    loop {
+      if(is_dev()) {
+        typecheck(main_loop, types);
+        (hot_reload(main_loop))();
+      } else {
+        main_loop();
+      }
+    }
+  } handle {
+    Log(message) => {
+      console.log(message);
+    }
+    // ...
+  }
+};
+
+effect {
+  if(is_dev()) {
+    runtime();
+  } else {
+    typecheck(main_loop, types);
+
+    compile(
+      "./program_name",
+      runtime,
+      types
+    );
+  }
+} handle {
+  Exception(e) => {
+    // handle exceptions,
+    // if you want strict typing for the whole program simply log it and quit the program on any
+    // TypeExceptions thats coming from the typecheck function
+  }
+  Log(message) => {
+    console.log(message);
+    continue;
+  }
+  Dev => {
+    continue env.IS_DEV == "true";
+  }
+  HotReload => {
+    // ...
+  }
+  // ...
+}
+
+```
+
+## Pipe operator
+
+A pipe operator would just take the output of the previous function and pass it on as the first argument to the next function.
+I imagine that the `pipe operator` could just be a dot `.`.
+This way we hopefully don't need prototype functions or class'es like in JavaScript.
+I want the langauge to be functional and not object orientated, OO was a mistake that the world still suffers from.
+
+```js
+// With a pipeoperator the following would just be "syntactig sugar":
+var1
+  .map( /* ... */ )
+  .filter( /* ... */ )
+  .reduce( /* ... */ )
+
+// Equivalient hypothetical code:
+redeuce(
+  filter(
+    map(
+      var1
+      /* ... */
+    ),
+    /* ... */
+  ),
+  /* ... */
+)
+```
+
+## Zig-like C-interopt
+
+It would be nice if you could import any C-header definition and call C-functions from the language.
+Zig got something like this.
