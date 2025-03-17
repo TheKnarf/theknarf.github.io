@@ -1,0 +1,20 @@
+---
+slug: git-on-windows
+title: Git on Windows
+dateWritten: 2025-03-17
+---
+
+# Git on Windows
+
+This is what you want to do if a colleague of yours is using Windows and is having problems with line endings:
+
+```bash
+git config set --global core.eol lf
+git config set --global core.autocrlf false
+```
+
+And then list all config and check that they don't have duplicates (there are often two global config files on Windows for Git):
+
+```bash
+git config --list --show-origin
+```
