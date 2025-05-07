@@ -1,0 +1,102 @@
+---
+slug: git-cheatsheet
+title: Git Cheatsheet
+dateWritten: 2025-05-07
+---
+
+import Aside from '../aside.tsx';
+
+# Git Cheatsheet
+
+## General tips
+
+- Prefer using `git commit --amend`, this will update the previous commit with your new changes. There is no point in having a bunch of commits that just called "fixes", use amend instead!
+
+<Aside>
+VSCode has a button for git commit with amend.
+</Aside>
+
+- Set the following global option to make it less likely to screw up stuff[^1]:
+
+[^1]: https://blog.sffc.xyz/post/185195398930/why-you-should-use-git-pull-ff-only
+
+```bash
+git config --global pull.ff only
+```
+
+- If you need to force push then always use `--force-with-lease` (this is more secure than `--force`).
+
+- Use `git status` often so that you know whats going on.
+
+- If you are on Windows check out [Git on Windows](../git-on-windows/).
+
+## Feature branches
+
+### Creating a feature branch
+
+1. First checkout the branch you want to base your feature branch on
+
+2. Then create your new branch:
+
+```bash
+git checkout -b name-of-feature-branch
+```
+
+3. And once you have a few commits and want to push it up for the first time:
+
+```bash
+git push -u origin head
+```
+
+### Squash all commits on your feature branch
+
+If you have a lot of commits that you want to squash in your feature branch.
+
+Let's say your development branch is called `dev`, then you can run:
+
+```bash
+git reset --soft $(git merge-base origin/dev head)
+git commit
+git push --force-with-lease
+```
+
+### Update your feature branch
+
+> [!WARNING]
+> Never use `git pull` in your own feature branch, its far to easy to screw up your branch this way.
+
+
+Often you'll need to keep your feature branch up to date with new changes.
+You should do this *often* to avoid as many merge conflicts as possible.
+If you have a lot of commits then it may be helpful to squash stuff **first** before updating your branch (see above).
+
+Let's say your development branch is called `dev`, then you can run:
+
+```bash
+git fetch
+git rebase origin/dev
+git push --force-with-lease
+```
+
+## Advanced tips
+
+- An interactive Git rebase can be used for both squashing and updating your branch, and gives you better control:
+
+```bash
+git fetch
+git rebase -i origin/dev
+```
+
+- If you need to move some stuff over to its own PR you can:
+
+  1. Go to your development branch (ex. `git checkout dev && git pull`)
+
+  2. Create a new feature branch
+
+  3. Copy inividual files or folder over from your other branch:
+
+  ```bash
+  git checkout old-branch-name src/file-or-folder
+  ```
+
+  4. Commit them in your new branch & push it up
