@@ -1,0 +1,83 @@
+---
+slug: lfdb
+title: Local-first db (lfdb)
+dateWritten: 2025-05-19
+---
+
+# Local-first db (lfdb)
+
+Local-First software is software written to work locally without an internet connection,
+but to still have cloud syncing capabilites to seamlessly work with the cloud.
+
+It relates to the idea of File-first software.
+
+I also like the philosophy of [Nikolai's priciples](https://chaser.eth.link/nikolais-principles).
+
+## Idea
+
+I've wanted to build a database-engine on top of Git forever.
+I've had this idea since before the term "local-first software" was first coined.
+
+Git was my first introduction to "local-first software",
+where each Git repo normally is a full clone of the repo,
+and you can work on it entirely offline,
+and then sync it with the cloud when you want to.
+
+The idea of local-first db is to take the 
+[Rust-based gitoxide-project](https://github.com/GitoxideLabs/gitoxide)
+and implement a database on top of it thats a superset of Git.
+
+We need the following features:
+
+- Works offline
+
+- Access management is built into the DB
+
+- Push & pull
+
+- Pub & sub
+
+- Privacy preserving (don't leak IP-addresses, emails, names, etc)
+
+## Tooling
+
+- [gitoxide](https://github.com/GitoxideLabs/gitoxide) for Git-like storage
+
+- [biscuit-rust](https://github.com/eclipse-biscuit/biscuit-rust) for authorization
+
+- Would something like [Fjall](https://github.com/fjall-rs/fjall?tab=readme-ov-file) / [Smoltable](https://github.com/marvin-j97/smoltable?tab=readme-ov-file) be usefull?
+
+- Some built inn CRDT types?
+
+## Backend / Transports
+
+I'd like to have built-in support for privacy preserving decentralized transports.
+To me the most interesting one is Veilid.
+
+
+- [Veilid](https://veilid.com/)
+
+- [Reticulum](https://reticulum.network/)
+
+- [I2P](https://geti2p.net/en/)
+
+Less interesting projects:
+
+- [Mycoria](https://mycoria.org/)
+
+- [Yggdrasil](https://yggdrasil-network.github.io/about.html)
+
+
+## Research
+
+- [Upwelling](https://www.inkandswitch.com/upwelling/) is doing a lot of what I'd like my system to be able to provide
+
+- [Backchannel](https://www.inkandswitch.com/backchannel/) list out a lot of how I'd
+like users to interact when building apps on-top of `lfdb` to preserve privacy.
+( [Backchannel prototype](https://github.com/inkandswitch/backchannel) )
+
+- [SNARKBlock](https://github.com/rozbb/snarkblock) some ideas on federated anonymous blocklists.
+I'm not sure if that exactly how I'd like to implement it,
+but it can be used as inspiration.
+
+
