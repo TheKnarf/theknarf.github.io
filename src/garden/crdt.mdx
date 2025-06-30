@@ -1,0 +1,47 @@
+---
+slug: crdt
+title: CRDT & Mergable Replicated Datatypes
+dateWritten: 2025-05-30
+---
+
+# { frontmatter.title }
+
+Conflict-free replicated datatypes is a set of datatypes that,
+unlike Git, guarantees that you can merge them without ever producing a merge conflict.
+This seems really powerful, but comes with a few big disatvantages.
+CRDT's are very specialiced datatypes with specific trade-offs for how they guarantee to be conflict free.
+Their usually really meta-data heavy.
+
+## Relevant articles
+
+- [I was wrong. CRDTs are the future](https://josephg.com/blog/crdts-are-the-future/)
+
+- [5000x faster CRDTs: An Adventure in Optimization](https://josephg.com/blog/crdts-go-brrr/)
+
+- [Trade-offs between Different CRDTs](https://interjectedfuture.com/trade-offs-between-different-crdts/)
+
+- [An Interactive Intro to CRDTs](https://jakelazaroff.com/words/an-interactive-intro-to-crdts/)
+
+- [Rope science, part 8 - CRDTs for concurrent editing](https://xi-editor.io/docs/rope_science_08.html)
+
+- [CRDT Survey, Part 2: Semantic Techniques](https://mattweidner.com/2023/09/26/crdt-survey-2.html)
+
+## Libraries
+
+- [Martin Klepmann's Automerge](https://github.com/automerge/automerge) - a library which provides fast implementations of several different CRDTs, a compact compression format for these CRDTs, and a sync protocol for efficiently transmitting those changes over the network
+
+   - [autosurgeon](https://github.com/automerge/autosurgeon) - a Rust library for working with data in automerge documents
+
+   - [Automerge Repo](https://github.com/automerge/automerge-repo) - a wrapper for the Automerge CRDT library which provides facilities to support working with many documents at once, as well as pluggable networking and storage
+
+- [Loro](https://github.com/loro-dev/loro) - Make your JSON data collaborative and version-controlled
+
+   - [Loro crdt-richtext](https://github.com/loro-dev/crdt-richtext) - Rust implementation of Peritext and Fugue
+
+- [cr-sqlite](https://github.com/vlcn-io/cr-sqlite) - Convergent replicated SQLite
+
+- [Yjs](https://github.com/yjs/yjs)
+
+## Other approaches
+
+- [Irmin](https://irmin.org/) - A distributed database built on the same principles as Git. Irmin is an OCaml library for building mergeable, branchable distributed data stores.
