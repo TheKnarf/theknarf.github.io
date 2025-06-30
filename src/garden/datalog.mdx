@@ -1,0 +1,39 @@
+---
+slug: datalog
+title: Datalog
+dateWritten: 2025-06-30
+---
+
+# Datalog
+
+Datalog is a non-turingcomplete logic query language.
+It's similar to Prolog, but it being not turingcomplete makes it more declerative,
+and means that there's an upper-bound on execution time.
+It's interesting as a query language for databases.
+
+## Resources
+
+- [Datalog in Rust by Frank McSherry](https://github.com/frankmcsherry/blog/blob/master/posts/2025-06-03.md)
+
+   - [datatoad](https://github.com/frankmcsherry/datatoad)
+
+- [Datalog in miniKanren](https://deosjr.github.io/dynamicland/datalog.html)
+
+- [clj-3df](https://github.com/sixthnormal/clj-3df/tree/master)
+
+## Incremental / differential Datalog variants?
+
+There is [DDlog](https://github.com/vmware-archive/differential-datalog) as an implementation of differential datalog,
+but it seems to be "deprecated" having its latest commit in 2022.
+
+One could try and build an implementation on one of these libraries:
+
+- [differential-dataflow](https://github.com/TimelyDataflow/differential-dataflow)
+
+- [dbsp](https://docs.rs/dbsp/latest/dbsp/)
+
+- [salsa](https://github.com/salsa-rs/salsa)
+
+Relevant article:
+
+- [On The Suitability of Differential Dataflow For Datalog Interpretation In Highly Dynamic Settings](https://dl.acm.org/doi/fullHtml/10.1145/3639592.3639622)
