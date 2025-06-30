@@ -34,6 +34,7 @@ export const Garden = () => {
     <ul>
       <li><a href="https://maggieappleton.com/">Maggie Appleton</a></li>
       <li><a href="https://szymonkaliski.com/">Szymon Kaliski</a></li>
+      <li><a href="https://notes.andymatuschak.org/About_these_notes">Andy's working notes</a></li>
     </ul>
 	</div>;
 }

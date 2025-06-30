@@ -1,0 +1,71 @@
+---
+slug: literate-md
+title: Literate Markdown and Datalog-based Dataview
+dateWritten: 2025-06-30
+---
+
+# { frontmatter.title }
+
+The [Obsidian Dataview plugin](https://github.com/blacksmithgu/obsidian-dataview) seems really useful.
+It let's you write queries over you Obsidian vault, treating markdown documents as a database,
+and embedding those queries in markdown files themself.
+Making it a bit closer to a "Notebook" without tying it to a programming language.
+
+I would like something like that, but:
+
+- I wish it was not tied to Obsidian
+
+   - I wish it could work standalone as a CLI tool
+
+   - I wish it was a re-usable library that one could build on top off
+
+   - I wish it could work both in Obsidian and Vim
+
+- I wish it could query more than just yaml frontmatter
+
+   - Ex. query arbitary TODO's, or table data in a markdown file
+
+- I wish it could be used to build UI's like [Kanban board's](https://publish.obsidian.md/kanban/Obsidian+Kanban+Plugin), and for changes to the query result to propegate back to the source.
+
+   - Queries may need to function as lenses into the Markdown AST
+
+- Maybe it could work with [Obsidian Freeform](https://macwright.com/2024/06/02/freeform)?
+
+- Based on [Datalog](/garden/datalog) instead of SQL-like queries
+
+## Use-cases
+
+- Collect TODO's across projects into an overview board
+
+- Mallable software, build simple tooling with Markdown and queries
+
+- An alternative to Notion databases
+
+- Sync Github issues to Markdown files and build your own Kanban-board materialized views into the data
+
+- Sync calender events to Markdown files, build Calender-blocking TODO lists (as materialized views)
+
+## Interesting tooling
+
+- [nb](https://github.com/xwmx/nb) - nb is a CLI tool for note-taking, bookmarking, archiving and knowledge base. It's doing a lot of what I'd like to build myself on top of my tooling.
+
+## Literate programming
+
+Literate programming is the idea of mixing long form writing with code.
+This can be to produce books, articles, documentation that doubles as runnable programs.
+That way you ensure that the code examples in your blog post or book work,
+or you have a natural way of writing more long form documentation.
+
+Interesting tooling:
+
+- [runbook](https://github.com/khalidx/runbook)
+
+- [inkjet](https://github.com/brandonkal/inkjet)
+
+## Memex & Archiving
+
+- [Memex](https://szymonkaliski.com/writing/2020-04-19-memex-dreams/)
+
+- [Archivist](https://github.com/szymonkaliski/archivist)
+
+- [Cartographist](https://github.com/szymonkaliski/cartographist)
