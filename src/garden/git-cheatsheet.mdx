@@ -52,10 +52,10 @@ git push -u origin head
 
 If you have a lot of commits that you want to squash in your feature branch.
 
-Let's say your development branch is called `dev`, then you can run:
+Let's say your development branch is called `main`, then you can run:
 
 ```bash
-git reset --soft $(git merge-base origin/dev head)
+git reset --soft $(git merge-base origin/main head)
 git commit
 git push --force-with-lease
 ```
@@ -70,11 +70,11 @@ Often you'll need to keep your feature branch up to date with new changes.
 You should do this *often* to avoid as many merge conflicts as possible.
 If you have a lot of commits then it may be helpful to squash stuff **first** before updating your branch (see above).
 
-Let's say your development branch is called `dev`, then you can run:
+Let's say your development branch is called `main`, then you can run:
 
 ```bash
 git fetch
-git rebase origin/dev
+git rebase origin/main
 git push --force-with-lease
 ```
 
@@ -84,12 +84,12 @@ git push --force-with-lease
 
 ```bash
 git fetch
-git rebase -i origin/dev
+git rebase -i origin/main
 ```
 
 - If you need to move some stuff over to its own PR you can:
 
-  1. Go to your development branch (ex. `git checkout dev && git pull`)
+  1. Go to your development branch (ex. `git checkout main && git pull`)
 
   2. Create a new feature branch
 
