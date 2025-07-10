@@ -35,46 +35,17 @@ We need the following features:
 
 - Push & pull
 
-- Pub & sub
+- Subscription queries
 
 - Privacy preserving (don't leak IP-addresses, emails, names, etc)
 
-## Tooling
+## Inspiring projects
 
-- [gitoxide](https://github.com/GitoxideLabs/gitoxide) for Git-like storage
+- [irmin](https://irmin.org/) - Irmin is an OCaml library for building mergeable, branchable distributed data stores thats Git compatible.
 
-- [biscuit-rust](https://github.com/eclipse-biscuit/biscuit-rust) for authorization
+- [dolt](https://github.com/dolthub/dolt) - Dolt is a SQL database that you can fork, clone, branch, merge, push and pull just like a Git repository.
 
-- Would something like [Fjall](https://github.com/fjall-rs/fjall?tab=readme-ov-file) / [Smoltable](https://github.com/marvin-j97/smoltable?tab=readme-ov-file) be usefull?
-
-- Some built inn CRDT types?
-
-- Other helpful libraries:
-
-   - [ulid-rs](https://github.com/dylanhart/ulid-rs)
-
-   - [jiff](https://github.com/BurntSushi/jiff) - datetime library for Rust
-
-   - [mnemonic](https://github.com/mbrubeck/rust-mnemonic)
-
-## Backend / Transports
-
-I'd like to have built-in support for privacy preserving decentralized transports.
-To me the most interesting one is Veilid.
-
-
-- [Veilid](https://veilid.com/)
-
-- [Reticulum](https://reticulum.network/)
-
-- [I2P](https://geti2p.net/en/)
-
-Less interesting projects:
-
-- [Mycoria](https://mycoria.org/)
-
-- [Yggdrasil](https://yggdrasil-network.github.io/about.html)
-
+   - Uses [Prolly Trees](https://www.dolthub.com/blog/2024-03-03-prolly-trees/) as its underlying datamodel (also see [People Keep Inventing Prolly Trees](https://www.dolthub.com/blog/2025-06-03-people-keep-inventing-prolly-trees/))
 
 ## Research
 
@@ -88,4 +59,96 @@ like users to interact when building apps on-top of `lfdb` to preserve privacy.
 I'm not sure if that exactly how I'd like to implement it,
 but it can be used as inspiration.
 
+## Architecture
 
+### Network transport
+
+Network transpot to communicate between Server / Client.
+I'd like to have built-in support for privacy preserving decentralized transports. To me the most interesting one is Veilid.
+
+Interesting ones:
+
+- [Veilid](https://veilid.com/) - Seems well designed. The [DefCon talk](https://www.youtube.com/watch?v=Kb1lKscAMDQ) presents it well. I like that it doesn't leak IP addresses.
+- [Reticulum](https://reticulum.network/) - Needs dedicated hardware, but could be an interesting target to also support
+- [I2P](https://geti2p.net/en/) - Newer than Tor, older than Veilid.
+
+Less interesting projects (very alpha and missing features):
+
+- [Mycoria](https://mycoria.org/) - "Private by default (WIP)", doesn't seem ready for use
+- [Yggdrasil](https://yggdrasil-network.github.io/about.html) - alpha-level research project
+
+### Query- & Permission-layer (and push / pull / subscribe)
+
+The permission system needs to be deeply integrated with the query system so that you can only pull down data that the client have read access to (and only push data it hash write access to)
+
+Push and pull model like Git
+
+An additinal Subscribe model where they can subscribe to updates to a particular query
+
+- Use [Biscuit authorization](https://www.biscuitsec.org/) ([biscuit-rust](https://github.com/eclipse-biscuit/biscuit-rust))
+
+### Datamode / Data-layer
+
+- Should everything be tables like in SQL databases?
+
+  - Propbably easier to build a uniform query system if the data is uniformly stored as tables
+
+- Or should everything be JSON / Apache Avro?
+
+- Support multiple different types?
+
+- Prolly Trees like in Dolt?
+
+   - Prolly Trees seems useful for splitting files into smaller chunks for syncing
+
+     - Can be useful for BitTorrent style file sync
+
+     - Rsync, Bup Backup and IPFS uses similar ideas
+
+  - Seems like Dolt threats a DB table as a "single file" and then chunks it as a Prolly Tree? Or does it do it per row?
+
+     - How will this work effectivly with permission systems?
+
+     - If you can't read a table then just don't sync it
+
+     - What if you don't have read access to a whole row?
+
+     - What if you don't have read access to a whole column?
+
+     - What if you don't have read access to a specific column in a specific row?
+
+     - How would forign-keys and constraints / view-maintaince work on partial data sets?
+
+### Block Store / Storage-layer
+
+The underlaying storage that read/writes to disk
+
+Could be:
+
+- [rocksdb](https://docs.rs/rocksdb/latest/rocksdb/) - C++ project with unoffical Rust wrapper
+
+- [sled](https://github.com/spacejam/sled) - Native Rust storage, more experimental
+
+- My own custom stuff
+
+Could potentially support multiple, databases like MySQL support multiple (InnoDB, MyISAM, ...).
+
+## Tooling
+
+- [gitoxide](https://github.com/GitoxideLabs/gitoxide) for Git-like storage
+
+- Would something like [Fjall](https://github.com/fjall-rs/fjall?tab=readme-ov-file) / [Smoltable](https://github.com/marvin-j97/smoltable?tab=readme-ov-file) be usefull?
+
+- Some built inn [CRDT types](/garden/crdt/)?
+
+- Other helpful libraries:
+
+   - [ulid-rs](https://github.com/dylanhart/ulid-rs)
+
+   - [jiff](https://github.com/BurntSushi/jiff) - datetime library for Rust
+
+   - [mnemonic](https://github.com/mbrubeck/rust-mnemonic)
+
+- Benchmarking:
+
+   - [sysbench](https://github.com/akopytov/sysbench)
