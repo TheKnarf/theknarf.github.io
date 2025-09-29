@@ -3,7 +3,7 @@
 //  This file is distributed under the MIT License
 //
 import { build } from 'vite';
-import ssgPlugin from './vite-react-router-ssg-plugin.tsx';
+import ssgPlugin from './ssg-for-vite.tsx';
 
 try {
   console.log("Running Vite build with SSG setup (Static site generation)\n");
