@@ -1,0 +1,48 @@
+---
+slug: sdf
+title: Signed Distance Fields (SDFs)
+dateWritten: 2025-09-08
+---
+
+# Signed Distance Fields (SDFs)
+
+Signed Distance Fields is a way to represent 3D models as implicit surfaces.
+to use them in video games you may want to turn them into a mesh.
+
+## Meshing algoritms
+
+Algoritm        | How to handle LODs   | Libraries
+----------------|----------------------|-----------
+Marching cubes  |[Transvoxel](https://transvoxel.org/?utm_source=chatgpt.com) |
+Surface Nets    |Skirting / stitching  | [fast-surface-nets-rs](https://github.com/bonsairobo/fast-surface-nets-rs), [GDvoxelTerrain](https://github.com/JorisAR/GDVoxelTerrain/blob/main/src/voxel_terrain/meshing/stitched_surface_nets/stitched_mesh_chunk.cpp)
+Dual Contouring |Can work on octrees   |
+
+## People building intersting SDF / Voxel engines
+
+- 0 FPS
+   - [blog](https://0fps.net/)
+
+- Ethan Gore
+   - [youtube](https://www.youtube.com/@ethangore8697)
+
+- CodeJar
+   - [youtube](https://www.youtube.com/watch?v=ip0IKGwx49M)
+   - [blog](https://jorisar.github.io/portfolio/posts/voxelplanets/)
+   - [github](https://github.com/JorisAR/GDVoxelTerrain/blob/main/src/voxel_terrain/meshing/stitched_surface_nets/stitched_mesh_chunk.cpp)
+
+- bonsairobo / DreamCat Games
+   - [blog](https://bonsairobo.medium.com/)
+   - [youtube](https://www.youtube.com/@bonsairobo)
+   - Rust library: [fast-surface-nets-rs](https://github.com/bonsairobo/fast-surface-nets-rs)
+   - Old project: [building-blocks](https://github.com/bonsairobo/building-blocks/issues/26)
+   - Libraries: [github list](https://github.com/stars/bonsairobo/lists/my-stack)
+
+- Miguel Cepero / Voxel Farm
+   - [youtube](https://www.youtube.com/@MCeperoG/videos)
+   - [blog](https://procworld.blogspot.com/)
+
+- Nick / ngildea
+  - [Nick's Voxel Blog](https://ngildea.blogspot.com/)
+  - [Dual Contouring: Seams & LOD for Chunked Terrain](https://ngildea.blogspot.com/2014/09/dual-contouring-chunked-terrain.html)
+  - [Github](https://github.com/nickgildea/leven)
+  - [youtube](https://www.youtube.com/@ngildea/videos)
