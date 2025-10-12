@@ -9,6 +9,10 @@ dateWritten: 2025-09-08
 Signed Distance Fields is a way to represent 3D models as implicit surfaces.
 to use them in video games you may want to turn them into a mesh.
 
+## Important resources
+
+- [Inigo Quilez](https://iquilezles.org/articles/distfunctions/) is the godfather of Signed Distance Functions, and have excelent information about them on his site.
+
 ## Meshing algoritms
 
 Algoritm        | How to handle LODs   | Libraries
@@ -19,30 +23,43 @@ Dual Contouring |Can work on octrees   |
 
 ## People building intersting SDF / Voxel engines
 
-- 0 FPS
-   - [blog](https://0fps.net/)
+**0 FPS**
+- [blog](https://0fps.net/)
 
-- Ethan Gore
-   - [youtube](https://www.youtube.com/@ethangore8697)
+**Ethan Gore**
+- [youtube](https://www.youtube.com/@ethangore8697)
 
-- CodeJar
-   - [youtube](https://www.youtube.com/watch?v=ip0IKGwx49M)
-   - [blog](https://jorisar.github.io/portfolio/posts/voxelplanets/)
-   - [github](https://github.com/JorisAR/GDVoxelTerrain/blob/main/src/voxel_terrain/meshing/stitched_surface_nets/stitched_mesh_chunk.cpp)
+**CodeJar**
+- [youtube](https://www.youtube.com/watch?v=ip0IKGwx49M)
+- [blog](https://jorisar.github.io/portfolio/posts/voxelplanets/)
+- [github](https://github.com/JorisAR/GDVoxelTerrain/blob/main/src/voxel_terrain/meshing/stitched_surface_nets/stitched_mesh_chunk.cpp)
 
-- bonsairobo / DreamCat Games
-   - [blog](https://bonsairobo.medium.com/)
-   - [youtube](https://www.youtube.com/@bonsairobo)
-   - Rust library: [fast-surface-nets-rs](https://github.com/bonsairobo/fast-surface-nets-rs)
-   - Old project: [building-blocks](https://github.com/bonsairobo/building-blocks/issues/26)
-   - Libraries: [github list](https://github.com/stars/bonsairobo/lists/my-stack)
+**bonsairobo / DreamCat Games**
+- [blog](https://bonsairobo.medium.com/)
+- [youtube](https://www.youtube.com/@bonsairobo)
+- Rust library: [fast-surface-nets-rs](https://github.com/bonsairobo/fast-surface-nets-rs)
+- Old project: [building-blocks](https://github.com/bonsairobo/building-blocks/issues/26)
+- Libraries: [github list](https://github.com/stars/bonsairobo/lists/my-stack)
 
-- Miguel Cepero / Voxel Farm
-   - [youtube](https://www.youtube.com/@MCeperoG/videos)
-   - [blog](https://procworld.blogspot.com/)
+**Miguel Cepero / Voxel Farm**
+- [youtube](https://www.youtube.com/@MCeperoG/videos)
+- [blog](https://procworld.blogspot.com/)
 
-- Nick / ngildea
-  - [Nick's Voxel Blog](https://ngildea.blogspot.com/)
-  - [Dual Contouring: Seams & LOD for Chunked Terrain](https://ngildea.blogspot.com/2014/09/dual-contouring-chunked-terrain.html)
-  - [Github](https://github.com/nickgildea/leven)
-  - [youtube](https://www.youtube.com/@ngildea/videos)
+**Nick / ngildea**
+- [Nick's Voxel Blog](https://ngildea.blogspot.com/)
+- [Dual Contouring: Seams & LOD for Chunked Terrain](https://ngildea.blogspot.com/2014/09/dual-contouring-chunked-terrain.html)
+- [Github](https://github.com/nickgildea/leven)
+- [youtube](https://www.youtube.com/@ngildea/videos)
+
+## Interesting talks
+
+**No Man's Sky**
+- [Building Worlds in No Man's Sky Using Math(s)](https://www.youtube.com/watch?v=C9RyEiEzMiU)
+  - talks about noise functions
+- [Continuous World Generation in 'No Man's Sky'](https://www.gdcvault.com/play/1024265/Continuous_World_Generation_in__No_Man_s_Sky_)
+  - overall architecture for how generation works
+    - Planetes store voxels as cubes that gets mapped onto a sphere
+    - Octrees
+    - Dual Contouring
+    - Triplanar Texturing (not locally, but across the whole sphere)
+  - Lot's more interesting details in the talk
