@@ -15,11 +15,13 @@ to use them in video games you may want to turn them into a mesh.
 
 ## Meshing algoritms
 
-Algoritm        | How to handle LODs   | Libraries
-----------------|----------------------|-----------
+Algoritm        | How to handle LODs   | Libraries  | Other references
+----------------|----------------------|------------|-------------------
 Marching cubes  |[Transvoxel](https://transvoxel.org/?utm_source=chatgpt.com) |
 Surface Nets    |Skirting / stitching  | [fast-surface-nets-rs](https://github.com/bonsairobo/fast-surface-nets-rs), [GDvoxelTerrain](https://github.com/JorisAR/GDVoxelTerrain/blob/main/src/voxel_terrain/meshing/stitched_surface_nets/stitched_mesh_chunk.cpp)
-Dual Contouring |Can work on octrees   |
+Dual Contouring |Can work on octrees   | | [Dual Contouring Tutorial](https://www.boristhebrave.com/2018/04/15/dual-contouring-tutorial/)
+Compact Isocontours by Moore and Warren (1995)| | | Supposedly used in Spore?
+Screened Poisson Reconstruction | | [PoissonReconstuction](https://github.com/ForesightMiningSoftwareCorporation/PoissonReconstruction) |
 
 ## People building intersting SDF / Voxel engines
 
@@ -51,6 +53,20 @@ Dual Contouring |Can work on octrees   |
 - [Github](https://github.com/nickgildea/leven)
 - [youtube](https://www.youtube.com/@ngildea/videos)
 
+**Sebastian Lague**
+- [youtube](https://www.youtube.com/@SebastianLague)
+
+**Ming-Lun “Allen” Chou creator of MudBun**
+- [Blog](https://allenchou.net/blog/)
+- [Twitter](https://x.com/TheAllenChou)
+- [MudBun](https://longbunnylabs.com/MudBun/)
+- [MudBun Unity Asset store](https://assetstore.unity.com/packages/tools/particles-effects/mudbun-volumetric-vfx-modeling-177891)
+
+**Matt Keeter**
+- [Website](https://www.mattkeeter.com/research/)
+- [Fidget project overview](https://www.mattkeeter.com/projects/fidget/)
+- [Fidget github](https://github.com/mkeeter/fidget)
+
 ## Interesting talks
 
 **No Man's Sky**
@@ -63,3 +79,12 @@ Dual Contouring |Can work on octrees   |
     - Dual Contouring
     - Triplanar Texturing (not locally, but across the whole sphere)
   - Lot's more interesting details in the talk
+
+**Matt Keeter**
+- [Implicit Surfaces & Independent Research](https://www.youtube.com/watch?v=UxGxsGnbyJ4&t=768s)
+
+## Raymarching
+
+Instead of turning the SDF to a mesh one can use Raymarching to render it directly.
+
+- [Painting with Math: A Gentle Study of Raymarching](https://blog.maximeheckel.com/posts/painting-with-math-a-gentle-study-of-raymarching/)
