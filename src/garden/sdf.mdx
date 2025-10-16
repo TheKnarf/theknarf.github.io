@@ -13,6 +13,8 @@ to use them in video games you may want to turn them into a mesh.
 
 - [Inigo Quilez](https://iquilezles.org/articles/distfunctions/) is the godfather of Signed Distance Functions, and have excelent information about them on his site.
 
+- [Geometric tools](https://www.geometrictools.com/Documentation/Documentation.html)
+
 ## Meshing algoritms
 
 Algoritm        | How to handle LODs   | Libraries  | Other references
@@ -82,9 +84,20 @@ Screened Poisson Reconstruction | | [PoissonReconstuction](https://github.com/Fo
 
 **Matt Keeter**
 - [Implicit Surfaces & Independent Research](https://www.youtube.com/watch?v=UxGxsGnbyJ4&t=768s)
+  - [Massively Parallel Rendering of Complex Closed-Form Implicit Surfaces](https://www.mattkeeter.com/research/mpr/)
+    - Paper of the same talk
+  - [Lipschitz Pruning: Hierarchical Simplification of Primitive-Based SDFs](https://wbrbr.org/publications/LipschitzPruning/)
+    - A different paper from someone else, that I belive does most of the same?
 
 ## Raymarching
 
 Instead of turning the SDF to a mesh one can use Raymarching to render it directly.
+It seems like combining meshing for collitions and raymarching for real time changes could be smart.
 
 - [Painting with Math: A Gentle Study of Raymarching](https://blog.maximeheckel.com/posts/painting-with-math-a-gentle-study-of-raymarching/)
+
+- [Some cool examples of what can be done](https://xcancel.com/miketuritzin)
+
+## Other techniques
+
+- [Voxel Displacement Renderer — Modernizing the Retro 3D Aesthetic](https://blog.danielschroeder.me/blog/voxel-displacement-modernizing-retro-3d/)

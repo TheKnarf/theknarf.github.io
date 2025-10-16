@@ -1,0 +1,44 @@
+---
+slug: physics
+title: Physics and physics solvers in games
+dateWritten: 2025-09-16
+---
+
+# Physics and physics solvers in games
+
+To have interactive games with physics you need some kind of "physics solver" or "physics engine".
+
+For games these needs to work in real time, but for movies they don't,
+as such there is a lot of techniques out there that isn't suitable for games.
+However some of these might be suitable in the future as new research improves on their efficancy,
+creates versions that can run on the GPU,
+and hardware in general gets improved.
+
+## Games "ready"
+
+By games "ready" I mean techniques where the paper shows that it can run in real time and potentially be used for games.
+
+- Most game engines uses some form of impulse-based dynamics I belive?
+
+- Extended Position Based Dynamics (XPBD)
+  - Detailed Rigid Body Simulation with Extended Position Based Dynamics (2020)
+    - [pdf](https://matthias-research.github.io/pages/publications/PBDBodies.pdf)
+    - [video](https://www.youtube.com/watch?v=CPq87E1vD8k)
+  - [Comparison to other techniques](https://github.com/Jondolf/avian/issues/346)
+
+- [Position Based MPM (PB-MPM)](https://github.com/electronicarts/pbmpm)
+  - Combines Position based techniques often used in games with MPM techniques used for simulating fluids
+
+- Graph coloring for multithreading physics
+  - [Example](https://xcancel.com/voxagonlabs/status/1881703759748935933)
+
+
+## Movie "ready"
+
+By movie "ready" I mean techniques that aren't real time, usually somewehere between seconds and minutes per frame,
+and therefor suitable for pre-rendering but not for games.
+
+- [ZOZO's Contact Solver](https://github.com/st-tech/ppf-contact-solver)
+   - Solves cliping for thin objects, great for clothing simulations
+   - Open source under Apache License, written in Rust + Python
+   - Usages; movies, cad software for clothes, pre-rendered cinematics
