@@ -1,0 +1,40 @@
+---
+slug: dst
+title: Deterministc Simulation Testing
+dateWritten: 2025-11-11
+---
+
+# { frontmatter.title }
+
+Mock all you IO and then use a test framework that test combinations of failure
+(disks failing, network partitioning, time, etc).
+DST gives you a deterministic way of replicating bugs in all kinds of edge cases.
+
+
+Model checkers are usefull for checking that something is possible in theory, DST allows you to test your implementation
+(this idea came from [TigerBeetle](https://www.youtube.com/watch?v=JoYjji1DZCE)).
+Joran and Dominik Tornow highlights how Paxos is proved to be correct in theory,
+but every implementation is riddled with bugs.
+
+
+I think it would be useful to haev programming languages with Algebraic Effect Types so that you already have mocked
+out all IO at the language level. If you don't have this your forced to replace the entire universe with your own mocked
+versions, which is not possible for third party libraries (so you end up having to mock those as well). However in a
+language with Algebraic Effect Types you've already mocked out IO at a language level, so it would be perfect to slap a
+DST testing library on top.
+
+
+I think it would be better to take a programming language like [Effekt](https://effekt-lang.org/) and implement
+DST in it (given that it already have Algebraic Effect Types).
+However maybe we could take Rust and use something like [effing-mad](https://github.com/rosefromthedead/effing-mad)
+and implement DST on top of it?
+
+## Talks & blog posts
+
+- ["Testing Distributed Systems w/ Deterministic Simulation" by Will Wilson](https://www.youtube.com/watch?v=4fFDFbi3toc) - how FoundationDB did it.
+
+- [Testing sync at Dropbox](https://dropbox.tech/infrastructure/-testing-our-new-sync-engine)
+
+## Libraries & tooling
+
+- [madsim](https://github.com/madsim-rs/madsim) - Rust library implementing DST by implementing an async runtime
