@@ -1,6 +1,7 @@
 import App, { Home, Blog, Post, Garden, Flower } from './app.tsx';
 import { routes as blogRoutes } from './blog';
 import { routes as gardenRoutes } from './garden';
+import Talks from './talks.mdx';
 
 const routes = [
 	{
@@ -24,6 +25,12 @@ const routes = [
 					...blogRoutes,
 				],
 			},
+
+      /* talks */
+      {
+        path: 'talks/',
+        element: <Talks />,
+      },
 
       /* Garden */
       {

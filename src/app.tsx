@@ -106,6 +106,7 @@ const App = () => {
 				<h1><NavLink to="/">TheKnarf</NavLink></h1>
         <nav>
           <NavLink to="/post">Posts</NavLink>
+          <NavLink to="/talks">Talks</NavLink>
           <NavLink to="/garden">Garden</NavLink>
         </nav>
 			</header>
