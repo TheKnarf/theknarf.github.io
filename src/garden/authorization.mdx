@@ -1,0 +1,28 @@
+---
+slug: authorization
+title: Authorization
+dateWritten: 2025-11-17
+---
+
+# { frontmatter.title }
+
+When building any application you'll need an authorization layer that decides if a user should have access to view / perform an action on any given resource.
+Instead of re-inventing this from scratch you can re-use systems to make this easier.
+
+## Traditional Client-Server solutions
+
+- [OpenFGA](https://openfga.dev/)
+
+- [Cedar](https://github.com/cedar-policy/cedar)
+
+- [CASL](https://github.com/stalniy/casl)
+
+
+## Peer-to-peer systems
+
+Peer-to-peer systems may have other requirements than traditional Client-Server solutions.
+Here are some relevant libraries / specs:
+
+- [User Controlled Authorization Networks (UCANs)](https://github.com/ucan-wg)
+
+- [Eclipse Biscuit](https://www.biscuitsec.org/)
