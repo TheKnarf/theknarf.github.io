@@ -1,0 +1,27 @@
+---
+slug: interaction-net
+title: Interaction Net
+dateWritten: 2025-11-30
+---
+
+# { frontmatter.title }
+
+Interaction nets a model of computation that some people are trying to build a programming langauge / runtime on top of.
+
+## Higher Order Company
+
+[Higher Order Company](https://higherorderco.com/) is building a runtime called [HVM](https://github.com/HigherOrderCO/HVM) and a programming language [Bend](https://github.com/HigherOrderCO/Bend) on top of it.
+
+## Pur
+
+[Daniel Salvadori](https://github.com/danaugrs) is working on [Pur](https://pur.dev/).
+
+In his own words [^1]:
+
+[^1]: https://news.ycombinator.com/item?id=46069564
+
+> I started working on this problem when I learned about Lamping's algorithm for optimal lambda reduction [1]. He invented a beautiful algorithm (often referred to as his "abstract algorithm"), which uses fan-in and fan-out nodes to reduce lambda terms optimally (with optimal sharing). Unfortunately, in order to make it fully work, some fans needed to duplicate one another while others needed to cancel one another. To determine this correctly Lamping had to extend his abstract algorithm with several delimiter node types and many additional graph reduction rules. These delimiter nodes perform "bookkeeping", making sure the right fan nodes match. I was dissatisfied with the need for these additional nodes and rules. There had to be a better way.
+> 
+> My goal was to try to implement Lamping's abstract algorithm without adding any delimiter nodes, and to do it under the interaction net paradigm to ensure perfect confluence. I tried countless solutions, and finally Delta-Nets was born. Feel free to ask any questions.
+> 
+> I recently started building a programming language on top of Delta-Nets, called Pur (https://pur.dev/).
