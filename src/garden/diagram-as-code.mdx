@@ -1,0 +1,121 @@
+---
+slug: diagram-as-code
+title: Diagram as Code
+dateWritten: 2025-11-30
+---
+
+# { frontmatter.title }
+
+Diagram engines, or layout engines for diagrams, as tools that let's you describe how to construct a diagram without explicitly setting positions and width/height parameters.
+It takes some kind of spec or DSL inn and produces an SVG or image as output.
+
+The two most well known such engines is probably:
+
+- [Graphviz DOT](https://graphviz.org/) - Graphviz is a a CLI program that takes in a description in the DOT language.
+It's a practical tool to keep in your toolbox as its usally easy to write scripts that output the DOT format, and then yuou can use Graphviz to vizualize it.
+
+- [Mermaid](https://mermaid.js.org/) - Mermaid is more specialized than Graphviz DOT.
+It has a bunch of smaller DSL's, each for describing a specific type of diagram (ex. Gannt chart, C4 diagram, Class Diagram, Entity Relationshop Diagram, etc).
+It's built with the intention that you embed the usage of these DSL's in markdown files so that you diagrams can live together with the rest of your documentation.
+It's less useful as a "generic tool", but really great for the specific diagrams it supports.
+
+Personally I've been wanting something else than just these two tools.
+Something thats as easy to use as Mermaid, but more generic so that you can represent more than just the hardcoded diagram types that Mermaid support.
+
+On the other hand Graphviz DOT is useful for a lot of things, but its hard to create diagrams with it thats supposed to look a certain way.
+And a small change to its input data may reorder stuff in a totally different way.
+
+What I would like is something that gives me enough power to create any type of diagram layout that I want,
+while still giving me powerfull enough constructs that I can declerativly describe how I want it layed out without hardcoding positions and width/height of each element.
+
+There's two new alternatives that come to mind:
+
+- [D2: Declerative Diagramming](https://d2lang.com/) - Seems to be a good step in the direction I described, but it still seems too limited.
+I don't think you could re-create all of the different diagram types Mermaid supports in D2.
+
+- [Bluefish](https://bluefishjs.org/) ([paper](https://arxiv.org/abs/2307.00146)) - Bluefish on the other hand seems exactly what I want.
+
+## Bluefish
+
+Bluefish is a declerative diagramming "framework" that let's you create any type of diagram you want using a JSX DSL in JavaScript.
+That way you don't only have a way to create any diagram you want,
+but you can use components like in React to create reusable Diagram types.
+That way you could in theory re-implement all of the diagram types Mermaid support,
+and share them with others by simply publishing an npm package.
+This seem like the perfect tool both to create highly specialized diagrams for your specific needs,
+and to re-use generic types when needed.
+
+So is there any problems with it? 
+Mostly the only problem is that its a research-grade project.
+It was first implemented in React, which I personally prefer, as it would open up being able to use it in a wide array of projects.
+Then that was scrapped, and it was reimplemented in SolidJS, which constrains its usage and adoption a bit more.
+
+But then as of the moment of writing this (Nov 2025) the GitHub repo seems dead as its [Github Repo](https://github.com/bluefishjs/bluefish) hasn't have any upates for 11 months,
+and their Discord server is similarly silent.
+
+I think something like Bluefish would be great, it just needs to be reimplemented and grow a proper community.
+
+## Re-implementing Bluefish?
+
+I think the current implementation is limited by a few architectual choices, and a rewrite following these requirements would be more useful:
+
+- A core layout engine independent of React / SolidJS
+
+  - Using JSX together with React / SolidJS is a nice interface for the end-user to create their diagrams in.
+  But it's a major limitation for the engine to be so tightly coupled with a specific fronted-library.
+  It would be better if there existed a core layout engine that just took a JSON-format as input,
+  and used that to procude the final SVG.
+  Then one could build a layer on top that let you create that by composing JSX component like in Bluefish.
+
+- Usable without a browser
+
+  - When generating static sites, which is useful for blogs and documentation pages,
+  it would be nice if the final SVG-files that the tool would output could be generated at compile time.
+  This is currently a limitation with Mermaid which makes it extra hard to integrate into different SSG-tools.
+
+  - A tool like Bluefish should ideally be just as useful on the web, as well as for usage with Latex / Typst.
+  It would be nice if the same tool and spec language could be used for both static content and dynamic webpages.
+
+  - This would similarly be easier to implement if its not tied to React / SolidJS
+
+- A default library of components covering a similar surface erea as Mermaid
+
+  - Part of the prevelance of Mermaid is that most people mostly ever care about a few standard types of diagrams
+
+  - If they need something more complex they would often go to drawing tools like [Draw.io](https://draw.io/) or [TLDraw](https://www.tldraw.com/)
+
+- Easy to generate as output from other tools
+
+  - A core JSON-spec + a JSX based DSL would allow other tool makers to target it as output from their tools.
+  This is often the main usage for Graphviz DOT, as a generic target that other can have their tools output too.
+  That way people don't have to reimplement a diagram engine / digram layout tool from scratch.
+
+- Embeddable in Markdown and/or MDX
+
+  - A React-based DSL could easily work out of the box with MDX files.
+  Making it easy to embed diagrams directly in documentation (the main use-case for Mermaid).
+  MDX supports both embedding React-code in MDX files, as well as importing libraries and reusable components out of the box.
+  So a Bluefish-like library with a React-library on top would work out of the box with MDX files.
+
+### Nice-to-have
+
+Some nice-to-have features that I don't think would necessary be a requirement:
+
+- Keep the split between the core engine and React, but still allow nice iteropt
+
+  - While the main usage for a JSX / React-DSL would be as a components-based specification DSL for creating the final JSON-spec that the core engine would compile to SVG,
+  it would also be nice if you could interopt nicely with React itself.
+  Imagine you create a complicated diagram with a bunch of components, and then you would like to add some `onClick`-handlers to some part of the diagram.
+  This wouldn't work if you constrain yourself to pure SVG, but maybe the React-library on top could extend on it and still allow you to do any type of React-like things that React normally can do with SVG embedded in React-components (like adding `onClick`-handlers).
+
+  - It would be important to clearly specify where the boundaries between the core-layout engine and the React-DSL-library then goes,
+  so that it could still be used in a fully static pipeline.
+
+  - Maybe each element would have a unique ID attached to them, and then the React-library could "re-hydrate" the SVG output and attach any `onClick`-handlers it would want?
+
+- Animation-support
+
+  - This also something the original Bluefish-creator has mentione that they would have liked to research and add to Bluefish.
+
+  - Perhaps a Bluefish-clone/reinmplementation doesn't need to itself have built inn animation support.
+  Maybe it just needs some way of creating stable ID's that (as mentioned above) a React-DSL-library could hook into to allow you to integrate with standard animation libraries in the React ecosystem.
