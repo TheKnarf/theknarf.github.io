@@ -33,16 +33,43 @@ Stuff I want from a CAD library:
 - To be written in a compiled language and compiled to WASM
     - Preferably Rust
 - To have high-level libraries in JavaScript / TypeScript
-    - To use React components (react reconsiler) as its DSL
+    - To use JSX / React components (react reconsiler) as its DSL
     - To be able to use with React Three Fiber
 - To be able to use from a Node and a CLI
     - To be able to run in Docker
+    - It should be just as easy to run it locally, as well as in a Github Action job
 
 ## Resources
 
-> [!NOTE]
-> TODO: add list of libraries that I know of and other related resources
+Name | License | Language | Notes
+-----|------------|----------|--------
+[OpenSCAD](https://github.com/openscad/openscad) | GPL | C++ | 
+[JSCAD](https://github.com/jscad/OpenJSCAD.org) | MIT | JavaScript | 
+[opencascade.js](https://github.com/donalffons/opencascade.js) | LGPL | JavaScript? |
+[replicad](https://github.com/sgenoud/replicad) | MIT | TypeScript | 
+[fornjot](https://github.com/hannobraun/fornjot) | 0BSD | Rust |
+[truck](https://github.com/ricosjp/truck) | Apache License 2.0 | Rust |
+[manifold](https://github.com/elalish/manifold) | Apache License 2.0 | C++ |
+[CadQuery](https://github.com/CadQuery/cadquery) | Apache License 2.0 | Python |
+[µcad](https://codeberg.org/microcad/microcad/) | APGL | Rust |
 
-- [ManifoldCAD](https://manifoldcad.org/#Tetrahedron%20Puzzle)
+### Proprietary solutions
 
-   - [Manifold (C++ library)](https://github.com/elalish/manifold)
+Name | Notes
+-----|--------
+[Buerli](https://buerli.io/) | The public interface is a nice JXS-based DSL (but the kernel itself is closed source)
+[bitbybit](https://github.com/bitbybit-dev/bitbybit) | Only partly open-sourced?
+
+### Other links
+
+- [open-cad-foundation](https://github.com/sequoia-hope/open-cad-foundation/discussions) - Some discussions on Github on open source CAD solutions
+
+- [transform-gizmo](https://github.com/urholaukkarinen/transform-gizmo)
+
+- [Triplex for VS Code](https://x.com/douges/status/1800140192030069126) - Nice example of how a code-first tool could look
+
+## Final thoughts
+
+I think the best solution would be to take a kernel in Rust (either fornjot, truck or µcad).
+Then build a JSX-based DSL on top of it similar to Buerli.
+And add an interactive embedable UI (inspired by Triplex) that could work both as a standalone Electron / Tauri app, but also as a VSCode plugin.
