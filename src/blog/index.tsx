@@ -29,4 +29,6 @@ for (const modulePath in modules) {
 	});
 }
 
+links.sort((a, b) => b.dateWritten.localeCompare(a.dateWritten, undefined, { sensitivity: 'base' }));
+
 export { routes, links };
