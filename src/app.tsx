@@ -113,7 +113,7 @@ const App = () => {
 			<Outlet />
 			<footer>
 				<hr />	
-				<span>Checkout my <a href="https://github.com/theknarf/">Github</a> profile</span>
+				<span>Find me at <a href="https://github.com/theknarf/">Github</a> and <a href="https://mu.social/profile/theknarf.npmx.social">@theknarf.npmx.social</a></span>
 			</footer>
 		</div>
   );
